@@ -131,6 +131,7 @@ Esse projeto visa a criação de um sistema de gestão para clínicas veterinár
 
 ### Atendimentos (Veterinário)
 ![Atendimentos (Veterinário)](./../prototipos/atendimentos_veterinario.png)
+![Ficha de Atendimento](./../prototipos//atendimentos_veterinario_ficha.png)
 
 ### CRUD de Clientes e Animais
 ![CRUD de Clientes e Animais](./../prototipos/crud_cliente_animal.png)
@@ -138,10 +139,15 @@ Esse projeto visa a criação de um sistema de gestão para clínicas veterinár
 ### CRUD de Serviços
 ![CRUD de Serviços](./../prototipos/crud_servicos.png)
 
+### Relatórios
+![Relatórios](./../prototipos/relatorios.png)
+
 ---
 
 ## Projeto
+### Diagrama de Classes
+![Diagrama de Classes](./DiagramaUML.PNG)
 
-
+### Arquitetura
 
 ---
