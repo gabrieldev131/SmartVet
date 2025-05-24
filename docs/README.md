@@ -146,7 +146,7 @@ Esse projeto visa a criação de um sistema de gestão para clínicas veterinár
 
 ## Projeto
 ### Diagrama de Classes
-![Diagrama de Classes](./DiagramaUML.PNG)
+![Diagrama de Classes](./../diagramas/DiagramaUML.PNG)
 
 ### Arquitetura
 ![Arquitetura](./web.PNG)
