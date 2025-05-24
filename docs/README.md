@@ -149,5 +149,33 @@ Esse projeto visa a criação de um sistema de gestão para clínicas veterinár
 ![Diagrama de Classes](./DiagramaUML.PNG)
 
 ### Arquitetura
+![Arquitetura](./web.PNG)
+
+### Autenticação e Autorização
+A autenticação e autorização no ASP.NET Core são implementadas com base em identidade de usuários (Identity), roles (funções/perfis) e claims (declarações personalizadas).
+
+A arquitetura permite definir exatamente o que cada tipo de usuário pode ou não pode fazer ao interagir com os endpoints da API.
+
+### Tipos de Usuários no Sistema:
+
+#### Usuários Autenticados (Clientes, Veterinários, etc.)
+- Criados via cadastro/login pela API pública.
+- Associados a uma ou mais roles definidas no sistema (ex: Cliente, Veterinario).
+- Acesso autenticado via token JWT, emitido após login.
+- Suas permissões são controladas por atributos [Authorize(Roles = "NomeDaRole")] nos controllers.
+
+#### Usuários Administrativos (Administrador, Recepcionista)
+- Criados diretamente por administradores do sistema ou via scripts iniciais (seed).
+- Possuem permissões elevadas para gerenciar usuários, dados e agendamentos.
+- Também utilizam JWT para autenticação.
+- Têm acesso a rotas protegidas por roles específicas como administrador ou recepcionista.
+
+### Tecnologias a Serem Utilizadas
+- ASP.NET Core – Para criação das rotas RESTful.
+- Entity Framework Core – Para acesso e mapeamento de dados no banco relacional.
+- JWT (JSON Web Token) – Para autenticação segura via token.
+- ASP.NET Identity – Para gerenciamento de usuários, senhas, roles e autenticação.
+- HTML, CSS – Para a interface do usuário.
+- SQLite – Banco de dados leve utilizado durante o desenvolvimento.
 
 ---
