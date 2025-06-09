@@ -1,11 +1,11 @@
-using ConectaFapes.Common.Domain.BaseEntities;
+using SmartVet.Domain.Base;
 using SmartVet.Domain.Enums;
 using SmartVet.Domain.Validation;
 using System.ComponentModel.DataAnnotations.Schema;
 
 
-  namespace SmartVet.Domain.Entities
-    {
+namespace SmartVet.Domain.Entities
+{
 
     public  class Service : BaseEntity {
 
@@ -13,14 +13,7 @@ using System.ComponentModel.DataAnnotations.Schema;
       public string Service_description { get; set; }
       public decimal Price { get; set; }
 
-
-
-
-
-    public Service()
-        {
-        }
-    public Service(string service_name,string service_description,decimal price)
+        public Service(string service_name,string service_description,decimal price)
         {
 
           var validationErrors = ServiceValidation(service_name,service_description,price);
@@ -34,19 +27,15 @@ using System.ComponentModel.DataAnnotations.Schema;
           Service_description = service_description;
           Price = price;
 
-
-
-
-
         }
 
-    private List<string>ServiceValidation(string service_name,string service_description,decimal price)
-      {
-        var errors = new List<string>();
+        private List<string>ServiceValidation(string service_name,string service_description,decimal price)
+        {
+            var errors = new List<string>();
 
-        // Validations
+            // Validations
 
-        return errors;
-      }
+            return errors;
+        }
     }
-    }
+}

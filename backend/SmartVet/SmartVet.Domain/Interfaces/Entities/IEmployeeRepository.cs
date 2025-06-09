@@ -1,5 +1,5 @@
 using SmartVet.Domain.Entities;
-using ConectaFapes.Common.Infrastructure.Interfaces;
+using SmartVet.Domain.Base;
 
 namespace SmartVet.Domain.Interfaces.Entities
 {

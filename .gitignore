@@ -1,0 +1,5 @@
+.venv
+venv
+backend/SmartVet/SmartVet.*/obj
+backend/obj
+backend/.vs
