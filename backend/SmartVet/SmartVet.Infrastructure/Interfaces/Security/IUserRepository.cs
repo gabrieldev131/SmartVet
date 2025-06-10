@@ -1,6 +1,6 @@
 using SmartVet.Domain.Security.Account.Entities;
 
-namespace SmartVet.Domain.Interfaces.Security
+namespace SmartVet.Infrastructure.Interfaces.Security
 {
     public interface IUserRepository : IBaseSecurityRepository<User>
     {

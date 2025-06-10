@@ -1,7 +1,7 @@
 using SmartVet.Domain.Entities;
-using SmartVet.Domain.Base;
+using SmartVet.Infrastructure.Repositories.Common;
 
-namespace SmartVet.Domain.Interfaces.Entities
+namespace SmartVet.Infrastructure.Interfaces.Entities
 {
     public interface IAdminRepository : IBaseRepository<Admin>
     {

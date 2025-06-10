@@ -1,5 +1,5 @@
 using Microsoft.EntityFrameworkCore;
-using SmartVet.Domain.Interfaces.Security;
+using SmartVet.Infrastructure.Interfaces.Security;
 using SmartVet.Domain.Security.Account.Entities;
 using SmartVet.Infrastructure.Context;
 

@@ -1,6 +1,6 @@
 using SmartVet.Domain.Security.Shared.Entities;
 
-namespace SmartVet.Domain.Interfaces.Security
+namespace SmartVet.Infrastructure.Interfaces.Security
 {
     public interface IBaseSecurityRepository<T> where T : Entity
     {

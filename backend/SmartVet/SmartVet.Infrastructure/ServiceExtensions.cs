@@ -1,15 +1,13 @@
-using SmartVet.Domain.Interfaces;
+using SmartVet.Infrastructure.Interfaces.Entities;
+using SmartVet.Infrastructure.Interfaces.Security;
 using SmartVet.Infrastructure.Context;
 using SmartVet.Infrastructure.Repositories;
-using SmartVet.Domain.Interfaces.Security;
-// using SmartVet.Domain.Interfaces.Common;
-using SmartVet.Domain.Interfaces.Entities;
 using SmartVet.Infrastructure.Repositories.Entities;
 using SmartVet.Infrastructure.Security.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using ConectaFapes.Common.Infrastructure.Interfaces;
+using SmartVet.Infrastructure.Repositories.Common;
 
 
 namespace SmartVet.Infrastructure

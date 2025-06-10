@@ -1,8 +1,8 @@
 ﻿using SmartVet.Domain.Entities;
 using SmartVet.Domain.Enums;
-using SmartVet.Domain.Interfaces.Entities;
+using SmartVet.Infrastructure.Interfaces.Entities;
 using SmartVet.Infrastructure.Context;
-using ConectaFapes.Common.Infrastructure.Repositories;
+using SmartVet.Infrastructure.Repositories.Common;
 using Microsoft.EntityFrameworkCore;
 
 namespace SmartVet.Infrastructure.Repositories.Entities

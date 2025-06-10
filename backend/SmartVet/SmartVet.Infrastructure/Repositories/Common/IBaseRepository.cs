@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SmartVet.Domain.Base;
 
-namespace SmartVet.Infrastructure.Base
+namespace SmartVet.Infrastructure.Repositories.Common
 {
     public interface IBaseRepository<T> where T : BaseEntity
     {

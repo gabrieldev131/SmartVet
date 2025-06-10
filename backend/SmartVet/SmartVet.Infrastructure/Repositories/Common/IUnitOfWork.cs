@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SmartVet.Infrastructure.Repositories.Common
+﻿namespace SmartVet.Infrastructure.Repositories.Common
 {
-    internal interface IUnitOfWork
+    public interface IUnitOfWork
     {
+        Task Commit(CancellationToken cancellationToken);
     }
 }
