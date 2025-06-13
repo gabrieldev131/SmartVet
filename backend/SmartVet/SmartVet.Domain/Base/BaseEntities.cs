@@ -20,4 +20,13 @@ namespace SmartVet.Domain.Base
             this.Id = entity.Id;
         }
     }
+
+    public class TResult<T>
+    {
+        public T Value { get; set; }
+
+        public TResult(T value)
+        {
+            Value = value;
+        }
 }

@@ -1,4 +1,4 @@
-using ConectaFapes.Common.Domain;
+using SmartVet.Domain.Base;
 using MediatR;
 using SmartVet.Application.Features.CRUD.AdminEntity.DTOs;
 using SmartVet.Domain.Enums;
@@ -6,7 +6,7 @@ using SmartVet.Domain.Enums;
 namespace SmartVet.Application.Features.CRUD.AdminEntity.AdminCase.Update
 {
     public record UpdateAdminCommand(
-      Guid Id,
+      Guid Id
 
     ) : IRequest<TResult<AdminResponseDTO>>
     {

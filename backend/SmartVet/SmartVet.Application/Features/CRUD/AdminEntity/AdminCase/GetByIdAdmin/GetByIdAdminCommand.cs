@@ -1,4 +1,4 @@
-using ConectaFapes.Common.Domain;
+using SmartVet.Domain.Base;
 using MediatR;
 using SmartVet.Application.Features.CRUD.AdminEntity.DTOs;
 

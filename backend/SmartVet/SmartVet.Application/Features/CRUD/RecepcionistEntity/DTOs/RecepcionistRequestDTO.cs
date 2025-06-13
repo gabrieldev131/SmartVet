@@ -1,5 +1,5 @@
 using MediatR;
-using ConectaFapes.Common.Domain;
+using SmartVet.Domain.Base;
 
 namespace SmartVet.Application.Features.CRUD.RecepcionistEntity.DTOs
 {

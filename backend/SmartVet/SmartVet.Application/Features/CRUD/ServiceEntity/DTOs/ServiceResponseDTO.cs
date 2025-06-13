@@ -1,4 +1,4 @@
-using ConectaFapes.Common.Application.DTO;
+using SmartVet.Application.Dto;
 using SmartVet.Application.Features.CRUD.ApointmentEntity.DTOs;
 
 

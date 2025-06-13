@@ -1,6 +1,6 @@
-using ConectaFapes.Common.Domain;
 using MediatR;
 using SmartVet.Application.Features.CRUD.ClientEntity.DTOs;
+using SmartVet.Domain.Base;
 using SmartVet.Domain.Enums;
 
 namespace SmartVet.Application.Features.CRUD.ClientEntity.ClientCase.Update

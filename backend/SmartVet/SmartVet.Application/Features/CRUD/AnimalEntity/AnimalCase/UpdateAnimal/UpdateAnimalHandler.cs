@@ -3,8 +3,8 @@ using SmartVet.Application.Features.CRUD.AnimalEntity.DTOs;
 using SmartVet.Application.Features.CRUD.AnimalEntity.Interface;
 using SmartVet.Domain.Entities;
 using SmartVet.Domain.Enums;
-using ConectaFapes.Common.Infrastructure.Interfaces;
 using SmartVet.Application.Base.BaseCase;
+using SmartVet.Infrastructure.Repositories.Common;
 
 namespace SmartVet.Application.Features.CRUD.AnimalEntity.AnimalCase.Update
 {

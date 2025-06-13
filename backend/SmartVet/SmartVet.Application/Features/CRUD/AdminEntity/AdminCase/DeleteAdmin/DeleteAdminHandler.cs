@@ -1,9 +1,9 @@
 using AutoMapper;
+using SmartVet.Application.Features.CRUD.AdminEntity.DTOs;
 using SmartVet.Application.Features.CRUD.AdminEntity.Interface;
 using SmartVet.Domain.Entities;
 using SmartVet.Domain.Enums;
-using SmartVet.Application.Features.CRUD.AdminEntity.DTOs;
-using ConectaFapes.Common.Infrastructure.Interfaces;
+using SmartVet.Infrastructure.Repositories.Common;
 using SmartVet.Application.Base.BaseCase;
 
 namespace SmartVet.Application.Features.CRUD.AdminEntity.AdminCase.Delete

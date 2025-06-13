@@ -3,8 +3,8 @@ using SmartVet.Application.Features.CRUD.RecepcionistEntity.DTOs;
 using SmartVet.Application.Features.CRUD.RecepcionistEntity.Interface;
 using SmartVet.Domain.Entities;
 using SmartVet.Domain.Enums;
-using ConectaFapes.Common.Infrastructure.Interfaces;
 using SmartVet.Application.Base.BaseCase;
+using SmartVet.Infrastructure.Repositories.Common;
 
 namespace SmartVet.Application.Features.CRUD.RecepcionistEntity.RecepcionistCase.Update
 {

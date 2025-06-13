@@ -1,6 +1,6 @@
 using SmartVet.Domain.Entities;
-using ConectaFapes.Common.Application.Interfaces.Services;
 using SmartVet.Application.Features.CRUD.ClientEntity.DTOs;
+using SmartVet.Application.Interfaces.BaseCrudInterface;
 
 namespace SmartVet.Application.Features.CRUD.ClientEntity.Interface
 {

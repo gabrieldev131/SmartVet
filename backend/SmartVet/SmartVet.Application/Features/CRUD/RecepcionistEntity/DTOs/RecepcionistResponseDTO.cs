@@ -1,4 +1,4 @@
-using ConectaFapes.Common.Application.DTO;
+using SmartVet.Application.Dto;
 
 
 namespace SmartVet.Application.Features.CRUD.RecepcionistEntity.DTOs
