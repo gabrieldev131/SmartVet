@@ -1,7 +1,9 @@
 ﻿using System.Linq;
 using Microsoft.EntityFrameworkCore;
+using SendGrid.Helpers.Mail;
 using SmartVet.Domain.Base;
 using SmartVet.Domain.Security.Account.Entities;
+using SmartVet.Domain.Security.Shared.Entities;
 using SmartVet.Infrastructure.Context;
 
 namespace SmartVet.Infrastructure.Repositories.Common
@@ -16,28 +18,27 @@ namespace SmartVet.Infrastructure.Repositories.Common
             Context = context;
         }
 
-        public Task Create(T baseEntity)
+        public async Task<T> Create(T baseEntity)
         {
-            Context.Add<T>(baseEntity);
-            Context.SaveChanges();
-
-            return Task.FromResult(baseEntity);
+            Context.Add(baseEntity);
+            await Context.SaveChangesAsync();
+            return baseEntity;
         }
 
-        public Task Delete(T baseEntity)
+        public async Task<T> Delete(T baseEntity)
         {
             Context.Remove<T>(baseEntity);
-            Context.SaveChanges();
+            await Context.SaveChangesAsync();
 
-            return Task.FromResult(baseEntity);
+            return baseEntity;
         }
 
-        public Task Update(T baseEntity)
+        public async Task<T> Update(T baseEntity)
         {
             Context.Update<T>(baseEntity);
-            Context.SaveChanges();
+            await Context.SaveChangesAsync();
 
-            return Task.FromResult(baseEntity);
+            return baseEntity;
         }
 
         public IQueryable<T> GetById(Guid id)

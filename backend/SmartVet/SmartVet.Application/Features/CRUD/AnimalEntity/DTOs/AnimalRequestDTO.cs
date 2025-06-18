@@ -12,8 +12,6 @@ namespace SmartVet.Application.Features.CRUD.AnimalEntity.DTOs
         public decimal Weight { get; set; }
         public int Birth_year { get; set; }
 
-        public Guid AnimalClientId { get; set; }
-
 
     }
 }

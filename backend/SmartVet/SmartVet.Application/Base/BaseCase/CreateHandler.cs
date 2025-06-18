@@ -31,6 +31,7 @@ namespace SmartVet.Application.Base.BaseCase
             var request = _mapper.Map<Request>(createRequest);
             var response = await _service.Create(request, cancellationToken);
             await _unitOfWork.Commit(cancellationToken);
+
             return response;
         }
     }

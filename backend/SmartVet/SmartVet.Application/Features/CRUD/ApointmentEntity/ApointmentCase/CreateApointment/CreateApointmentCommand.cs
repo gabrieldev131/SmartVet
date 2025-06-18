@@ -9,9 +9,7 @@ namespace SmartVet.Application.Features.CRUD.ApointmentEntity.ApointmentCase.Cre
       DateTime? scheduled_date,
       int? urgency,
       string? result_description,
-      Guid AnimalId,
-      Guid VeterinarianId,
-      Guid ServiceId
+      Guid AnimalId
 
     ) : IRequest<TResult<ApointmentResponseDTO>>
     {

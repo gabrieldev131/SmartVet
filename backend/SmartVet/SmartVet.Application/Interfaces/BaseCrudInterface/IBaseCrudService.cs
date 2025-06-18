@@ -6,11 +6,11 @@ namespace SmartVet.Application.Interfaces.BaseCrudInterface
 {
     public interface IBaseCrudService<Request, Response, Entity>
     {
-        Response Create(Request request, CancellationToken cancellationToken);
+        Task<TResult<Response>> Create(Request request, CancellationToken cancellationToken);
 
-        Response Update(Request request, CancellationToken cancellationToken);
+        Task<TResult<Response>> Update(Request request, CancellationToken cancellationToken);
 
-        Response Delete(Guid id, CancellationToken cancellationToken);
+        Task<TResult<Response>> Delete(Guid id, CancellationToken cancellationToken);
         ICollection<Response> GetAll();
         Response GetById(Guid id);
     }

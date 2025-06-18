@@ -27,41 +27,48 @@ namespace SmartVet.Application.Services.BaseCrudInterface
             _repository = repository;
         }
 
-        public virtual Response Create(Request request, CancellationToken cancellationToken)
+        public virtual async Task<TResult<Response>> Create(Request request, CancellationToken cancellationToken)
         {
-            if (cancellationToken.IsCancellationRequested)
+            var entity = _mapper.Map<Entity>(request);
+            
+            if (cancellationToken.IsCancellationRequested || entity == null)
             {
                 throw new OperationCanceledException();
             }
-            var entity = _mapper.Map<Entity>(request);
+            await _repository.Create(entity);
 
-            var result = _mapper.Map<Response>(_repository.Create(entity));
-            return result;
+            return _mapper.Map<TResult<Response>>(entity);
         }
 
-        public virtual Response Update(Request request, CancellationToken cancellationToken) 
+        public virtual async Task<TResult<Response>> Update(Request request, CancellationToken cancellationToken) 
         {
-            if (cancellationToken.IsCancellationRequested)
+            var entity = _mapper.Map<Entity>(request);
+            var ent = GetById(entity.Id);
+
+            if (cancellationToken.IsCancellationRequested || ent == null)
             {
                 throw new OperationCanceledException();
             }
-            var entity = _mapper.Map<Entity>(request);
 
-            var result = _mapper.Map<Response>(_repository.Update(entity));
-            return result;
+            await _repository.Update(entity);
+
+            return _mapper.Map<TResult<Response>>(entity);
         }
 
-        public virtual Response Delete(Guid id, CancellationToken cancellationToken) 
+        public virtual async Task<TResult<Response>> Delete(Guid id, CancellationToken cancellationToken) 
         {
-            if (cancellationToken.IsCancellationRequested)
+            var ent = GetById(id);
+
+            if (cancellationToken.IsCancellationRequested || ent == null)
             {
                 throw new OperationCanceledException();
             }
-            var response = GetById(id);
-            var entity = _mapper.Map<Entity>(response);
 
-            var result = _mapper.Map<Response>(_repository.Delete(entity));
-            return result;
+            var entity = _mapper.Map<Entity>(ent);
+
+            await _repository.Delete(entity);
+
+            return _mapper.Map<TResult<Response>>(entity);
         }
         public virtual ICollection<Response> GetAll()
         {

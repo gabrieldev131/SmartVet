@@ -17,16 +17,7 @@ namespace SmartVet.Domain.Base
 
         public virtual void Update(BaseEntity entity)
         {
-            this.Id = entity.Id;
+            Id = entity.Id;
         }
     }
-
-    public class TResult<T>
-    {
-        public T Value { get; set; }
-
-        public TResult(T value)
-        {
-            Value = value;
-        }
 }

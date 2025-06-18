@@ -14,16 +14,11 @@ namespace SmartVet.Domain.Entities
       public string Breed { get; set; }
       public decimal Weight { get; set; }
       public int Birth_year { get; set; }
-      //ManyToOne
-      public Client? Client { get; set; }
-      public Guid AnimalClientId { get; set; }
-
-      //OneToMany
-      public ICollection<Apointment>? Apointments { get; set;}
-        public Animal(string animal_name,string specie,string breed,decimal weight,int birth_year, Guid clientId)
+      public ICollection<Apointment>? Apointments { get; set; }
+        public Animal(string animal_name,string specie,string breed,decimal weight,int birth_year)
         {
 
-          var validationErrors = AnimalValidation(animal_name,specie,breed,weight,birth_year, clientId);
+          var validationErrors = AnimalValidation(animal_name,specie,breed,weight,birth_year);
 
           if (validationErrors.Count > 0)
             {
@@ -35,11 +30,10 @@ namespace SmartVet.Domain.Entities
           Breed = breed;
           Weight = weight;
           Birth_year = birth_year;
-          AnimalClientId = clientId;
 
         }
 
-        private List<string>AnimalValidation(string animal_name,string specie,string breed,decimal weight,int birth_year, Guid clientId)
+        private List<string>AnimalValidation(string animal_name,string specie,string breed,decimal weight,int birth_year)
         {
             var errors = new List<string>();
 

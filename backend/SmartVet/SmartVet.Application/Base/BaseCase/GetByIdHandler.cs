@@ -1,6 +1,4 @@
 using AutoMapper;
-using ConectaFapes.Common.Application.DTO;
-using ConectaFapes.Common.Application.Interfaces.Services;
 using MediatR;
 using SmartVet.Domain.Base;
 using SmartVet.Application.Dto;

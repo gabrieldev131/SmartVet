@@ -22,14 +22,14 @@ namespace SmartVet.Infrastructure
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IRoleRepository, RoleRepository>();
-            services.AddScoped<IGenericUserRepository, GenericUserRepository>();
-            services.AddScoped<IEmployeeRepository, EmployeeRepository>();
-            services.AddScoped<IAdminRepository, AdminRepository>();
-            services.AddScoped<IRecepcionistRepository, RecepcionistRepository>();
-            services.AddScoped<IVeterinarianRepository, VeterinarianRepository>();
-            services.AddScoped<IClientRepository, ClientRepository>();
+            //services.AddScoped<IGenericUserRepository, GenericUserRepository>();
+            //services.AddScoped<IEmployeeRepository, EmployeeRepository>();
+            //services.AddScoped<IAdminRepository, AdminRepository>();
+            //services.AddScoped<IRecepcionistRepository, RecepcionistRepository>();
+            //services.AddScoped<IVeterinarianRepository, VeterinarianRepository>();
+            //services.AddScoped<IClientRepository, ClientRepository>();
             services.AddScoped<IAnimalRepository, AnimalRepository>();
-            services.AddScoped<IServiceRepository, ServiceRepository>();
+            //services.AddScoped<IServiceRepository, ServiceRepository>();
             services.AddScoped<IApointmentRepository, ApointmentRepository>();
 
         }

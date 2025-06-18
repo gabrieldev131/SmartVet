@@ -11,7 +11,6 @@ namespace SmartVet.Application.Features.CRUD.AnimalEntity.AnimalCase.Create
       string? breed,
       decimal? weight,
       int? birth_year,
-      Guid ClientId,
       Guid ApointmentId
 
     ) : IRequest<TResult<AnimalResponseDTO>>

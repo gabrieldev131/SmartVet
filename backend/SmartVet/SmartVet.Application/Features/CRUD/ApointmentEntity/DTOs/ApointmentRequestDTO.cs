@@ -11,7 +11,6 @@ namespace SmartVet.Application.Features.CRUD.ApointmentEntity.DTOs
         public string? Result_description { get; set; }
 
         public Guid ApointmentAnimalId { get; set; }
-        public Guid ApointmentVeterinarianId { get; set; }
 
 
     }

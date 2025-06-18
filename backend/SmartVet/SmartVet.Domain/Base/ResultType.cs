@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SmartVet.Application.Dto
+namespace SmartVet.Domain.Base
 {
-    public class BaseDto
+    public enum ResultType
     {
-        public Guid Id { get; set; }
-
+        SUCCESS,
+        BAD_REQUEST
     }
 }

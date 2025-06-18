@@ -14,18 +14,10 @@ namespace SmartVet.Domain.Entities
       //ManyToOne
       public Animal? Animal { get; set; }
       public Guid ApointmentAnimalId {get; set; }
-
-      //ManyToOne
-      public Veterinarian? Veterinarian { get; set; }
-      public Guid ApointmentVeterinarianId {get; set; }
-
-      //ManyToMany
-      public ICollection<Service>? Services { get; set;}
-
-        public Apointment(DateTime scheduled_date,int urgency,string result_description, Guid animalId,Guid veterinarianId,ICollection<Service>? services)
+        public Apointment(DateTime scheduled_date,int urgency,string result_description, Guid apointmentAnimalId)
         {
 
-          var validationErrors = ApointmentValidation(scheduled_date,urgency,result_description, animalId,veterinarianId,services);
+          var validationErrors = ApointmentValidation(scheduled_date,urgency,result_description, apointmentAnimalId);
 
           if (validationErrors.Count > 0)
             {
@@ -35,15 +27,11 @@ namespace SmartVet.Domain.Entities
           Scheduled_date = scheduled_date;
           Urgency = urgency;
           Result_description = result_description;
-          ApointmentAnimalId = animalId;
-
-          ApointmentVeterinarianId = veterinarianId;
-
-          Services = services;
+          ApointmentAnimalId = apointmentAnimalId;
 
         }
 
-        private List<string>ApointmentValidation(DateTime scheduled_date,int urgency,string result_description, Guid animalId,Guid veterinarianId,ICollection<Service>? services)
+        private List<string>ApointmentValidation(DateTime scheduled_date,int urgency,string result_description, Guid animalId)
         {
             var errors = new List<string>();
 
