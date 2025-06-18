@@ -30,5 +30,11 @@ namespace SmartVet.Domain.Base
             Type = ResultType.BAD_REQUEST;
             Errors.Add(error);
         }
+
+        public static TResult<T> Success(T value) => new TResult<T>
+        {
+            IsSuccess = true,
+            Value = value
+        };
     }
 }

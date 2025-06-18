@@ -37,7 +37,9 @@ namespace SmartVet.Application.Services.BaseCrudInterface
             }
             await _repository.Create(entity);
 
-            return _mapper.Map<TResult<Response>>(entity);
+            var response = _mapper.Map<Response>(entity);
+
+            return TResult<Response>.Success(response);
         }
 
         public virtual async Task<TResult<Response>> Update(Request request, CancellationToken cancellationToken) 
@@ -52,7 +54,9 @@ namespace SmartVet.Application.Services.BaseCrudInterface
 
             await _repository.Update(entity);
 
-            return _mapper.Map<TResult<Response>>(entity);
+            var response = _mapper.Map<Response>(entity);
+
+            return TResult<Response>.Success(response);
         }
 
         public virtual async Task<TResult<Response>> Delete(Guid id, CancellationToken cancellationToken) 
@@ -68,7 +72,9 @@ namespace SmartVet.Application.Services.BaseCrudInterface
 
             await _repository.Delete(entity);
 
-            return _mapper.Map<TResult<Response>>(entity);
+            var response = _mapper.Map<Response>(entity);
+
+            return TResult<Response>.Success(response);
         }
         public virtual ICollection<Response> GetAll()
         {

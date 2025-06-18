@@ -11,8 +11,7 @@ namespace SmartVet.Application.Features.CRUD.AnimalEntity.AnimalCase.Update
       string? specie,
       string? breed,
       decimal? weight,
-      int? birth_year,
-      Guid ApointmentId
+      int? birth_year
 
     ) : IRequest<TResult<AnimalResponseDTO>>
     {

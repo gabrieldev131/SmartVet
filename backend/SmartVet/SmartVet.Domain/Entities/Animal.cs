@@ -15,6 +15,8 @@ namespace SmartVet.Domain.Entities
       public decimal Weight { get; set; }
       public int Birth_year { get; set; }
       public ICollection<Apointment>? Apointments { get; set; }
+
+        public Animal() { }
         public Animal(string animal_name,string specie,string breed,decimal weight,int birth_year)
         {
 

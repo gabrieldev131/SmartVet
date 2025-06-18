@@ -44,7 +44,7 @@ namespace SmartVet.Infrastructure.Repositories.Common
         public IQueryable<T> GetById(Guid id)
         {
 
-            return Context.Set<T>().Where(e => e.Id == id);
+            return Context.Set<T>().AsNoTracking().Where(e => e.Id == id);
         }
 
         public IQueryable<T> GetAll()
