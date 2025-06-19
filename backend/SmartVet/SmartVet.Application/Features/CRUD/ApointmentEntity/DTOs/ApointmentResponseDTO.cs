@@ -11,7 +11,7 @@ namespace SmartVet.Application.Features.CRUD.ApointmentEntity.DTOs
         public DateTime Scheduled_date { get; set; }
         public int Urgency { get; set; }
         public string? Result_description { get; set; }
-        public virtual AnimalResponseDTO? Animal { get; set; }
+        //public virtual AnimalResponseDTO? Animal { get; set; }
         public Guid ApointmentAnimalId { get; set; }
     }
 }
