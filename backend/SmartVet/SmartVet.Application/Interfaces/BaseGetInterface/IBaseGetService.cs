@@ -1,4 +1,4 @@
-using ConectaFapes.Common.Domain;
+using SmartVet.Domain.Base;
 
 namespace SmartVet.Application.Interfaces.BaseGetInterface
 {

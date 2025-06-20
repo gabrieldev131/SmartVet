@@ -1,11 +1,11 @@
 using AutoMapper;
 using SmartVet.Application.Features.CRUD.AnimalEntity.Interface;
 using SmartVet.Domain.Entities;
-using SmartVet.Domain.Interfaces.Entities;
+using SmartVet.Infrastructure.Interfaces.Entities;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using ConectaFapes.Common.Application.Services.BaseCrudService;
 using SmartVet.Application.Features.CRUD.AnimalEntity.DTOs;
+using SmartVet.Application.Services.BaseCrudInterface;
 
 namespace SmartVet.Application.Features.CRUD.AnimalEntity.Service
 {

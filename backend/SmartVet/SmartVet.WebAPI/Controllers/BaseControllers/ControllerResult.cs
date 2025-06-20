@@ -1,6 +1,5 @@
-﻿using ConectaFapes.Common.Domain;
-using ConectaFapes.Common.Domain.ResultEntities.Enum;
-using ConectaFapes.Common.Utils.Responses;
+﻿using SmartVet.Domain.Validation;
+using SmartVet.Domain.Base;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 

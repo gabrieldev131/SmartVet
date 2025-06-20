@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
-using ConectaFapes.Common.Application.DTO;
-using ConectaFapes.Common.Domain;
+using SmartVet.Domain.Base;
+using SmartVet.Application.Dto;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

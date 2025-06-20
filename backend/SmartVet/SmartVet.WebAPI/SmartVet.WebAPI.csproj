@@ -36,11 +36,5 @@
     <ProjectReference Include="..\SmartVet.Infrastructure\SmartVet.Infrastructure.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-	    <Reference Include="ConectaFapes.Common">
-		    <HintPath>.\..\conectafapes-packages\ConectaFapes.Common.dll</HintPath>
-	    </Reference>
-  </ItemGroup>
-
 </Project>
 

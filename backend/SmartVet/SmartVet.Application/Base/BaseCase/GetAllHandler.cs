@@ -1,8 +1,7 @@
-using ConectaFapes.Common.Application.DTO;
-using ConectaFapes.Common.Application.Interfaces.Services;
-using ConectaFapes.Common.Domain;
-using ConectaFapes.Common.Domain.BaseEntities;
 using MediatR;
+using SmartVet.Domain.Base;
+using SmartVet.Application.Dto;
+using SmartVet.Application.Interfaces.BaseCrudInterface;
 
 namespace SmartVet.Application.Base.BaseCase
 {

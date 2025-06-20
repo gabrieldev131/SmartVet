@@ -1,11 +1,11 @@
 using AutoMapper;
 using SmartVet.Domain.Entities;
+using SmartVet.Domain.Base;
 using SmartVet.Application.Features.CRUD.ApointmentEntity.ApointmentCase.Create;
 using SmartVet.Application.Features.CRUD.ApointmentEntity.ApointmentCase.Delete;
 using SmartVet.Application.Features.CRUD.ApointmentEntity.ApointmentCase.GetById;
 using SmartVet.Application.Features.CRUD.ApointmentEntity.ApointmentCase.Update;
 using SmartVet.Application.Features.CRUD.ApointmentEntity.DTOs;
-using ConectaFapes.Common.Utils.Responses;
 
 namespace SmartVet.Application.Mappers.Entities
 {
@@ -28,11 +28,11 @@ namespace SmartVet.Application.Mappers.Entities
 
             #region DTO's para Commads de Caso de Uso
             CreateMap<ApointmentRequestDTO, CreateApointmentCommand>().ReverseMap()
-                                                                                    .ForMember(dest => dest.ApointmentAnimalId, opt => opt.MapFrom(src => src.AnimalId))
-                                                                                    .ForMember(dest => dest.ApointmentVeterinarianId, opt => opt.MapFrom(src => src.VeterinarianId));
+                                                                                    .ForMember(dest => dest.ApointmentAnimalId, opt => opt.MapFrom(src => src.AnimalId));
+            //.ForMember(dest => dest.ApointmentVeterinarianId, opt => opt.MapFrom(src => src.VeterinarianId));
             CreateMap<ApointmentRequestDTO, UpdateApointmentCommand>().ReverseMap()
-                                                                                    .ForMember(dest => dest.ApointmentAnimalId, opt => opt.MapFrom(src => src.AnimalId))
-                                                                                    .ForMember(dest => dest.ApointmentVeterinarianId, opt => opt.MapFrom(src => src.VeterinarianId));
+                                                                                    .ForMember(dest => dest.ApointmentAnimalId, opt => opt.MapFrom(src => src.AnimalId));
+                                                                                    //.ForMember(dest => dest.ApointmentVeterinarianId, opt => opt.MapFrom(src => src.VeterinarianId));
             CreateMap<ApointmentRequestDTO, DeleteApointmentCommand>().ReverseMap();
             #endregion
 
