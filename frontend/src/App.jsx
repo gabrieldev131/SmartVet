@@ -1,48 +1,36 @@
-<<<<<<< Updated upstream
-// src/App.jsx
-
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
-import Atendimento from '../pages/Atendimento';
-import Usuarios from '../pages/Usuarios';
-import Animais from '../pages/Animais';
-// Você pode criar um componente de Navegação/Layout para não repetir o menu
-// import Navbar from './components/Navbar';
-=======
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import MainLayout from './layouts/MainLayout';
 import LoginPage from './pages/LoginPage';
->>>>>>> Stashed changes
+import ClientesAnimaisPage from './pages/ClientesAnimaisPage';
+
+// Componente simples para a página inicial
+const HomePage = () => <h1>Página Inicial</h1>;
 
 function App() {
   return (
     <Router>
-<<<<<<< Updated upstream
-      {/* <Navbar /> */}
-      {/* Exemplo de menu simples: */}
-      <nav style={{padding: '1rem', backgroundColor: '#eee'}}>
-        <Link to="/" style={{marginRight: '1rem'}}>Atendimento</Link>
-        <Link to="/usuarios" style={{marginRight: '1rem'}}>Usuários</Link>
-        <Link to="/animais">Animais</Link>
-      </nav>
-
       <Routes>
-        <Route path="/" element={<Atendimento />} />
-        <Route path="/usuarios" element={<Usuarios />} />
-        <Route path="/animais" element={<Animais />} />
-      </Routes>
-    </Router>
-  )
-}
-
-export default App
-=======
-      <Routes>
+        {/* Rota de Login não tem a Navbar */}
         <Route path="/login" element={<LoginPage />} />
-        {/* Adicione outras rotas aqui, ex: <Route path="/" element={<HomePage />} /> */}
+
+        {/* Rotas dentro do MainLayout (com a Navbar) */}
+        <Route path="/" element={
+          <MainLayout>
+            <HomePage />
+          </MainLayout>
+        } />
+        <Route path="/clientes-e-animais" element={
+          <MainLayout>
+            <ClientesAnimaisPage />
+          </MainLayout>
+        } />
+
+        {/* Redireciona qualquer outra rota para a página inicial */}
+        <Route path="*" element={<Navigate to="/" />} />
       </Routes>
     </Router>
   );
 }
 
 export default App;
->>>>>>> Stashed changes
