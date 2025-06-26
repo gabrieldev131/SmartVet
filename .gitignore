@@ -31,7 +31,8 @@ pnpm-debug.log*
 .npm/
 .eslintcache
 .stylelintcache
-
+# Ignorar cache e dependências pré-compiladas do Vite
+frontend/.vite/
 # Relatórios de cobertura de testes
 # Gerados ao executar testes com a opção de cobertura.
 /coverage
