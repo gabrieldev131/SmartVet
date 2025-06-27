@@ -11,6 +11,10 @@
 /dist
 /build
 
+
+/frontend/.vite/
+/frontend/node_modules/
+/frontend/dist/
 # Ignorar arquivos de ambiente locais
 # Estes arquivos contêm variáveis de ambiente específicas da sua máquina local
 # e não devem ser compartilhados. Isso inclui chaves de API, senhas de banco de dados, etc.
@@ -32,7 +36,6 @@ pnpm-debug.log*
 .eslintcache
 .stylelintcache
 # Ignorar cache e dependências pré-compiladas do Vite
-frontend/.vite/
 # Relatórios de cobertura de testes
 # Gerados ao executar testes com a opção de cobertura.
 /coverage
