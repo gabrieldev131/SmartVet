@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import ClientCard from '../components/ClientCard'; // Certifique-se de que o ClientCard está no lugar certo
+import ClientCard from '../components/ClientCard';
+import Modal from '../components/Modal'; // Importe o Modal
+import NewClientForm from '../components/NovoClienteForm'; // Importe o formulário
 
-// Dados de exemplo (mock data) para popular a tela
-const mockClients = [
+// Dados de exemplo (mock data) - Tornamos mutável para adicionar novos clientes
+const initialMockClients = [
   {
     id: 1,
     nome: 'Robson Ferreira',
@@ -33,61 +35,60 @@ const mockClients = [
   },
 ];
 
-// Paleta de cores para consistência
 const colors = {
-  primaryBlue: '#3498db', // Azul vibrante
-  secondaryOrange: '#e67e22', // Laranja energético
-  lightBlue: '#81d4fa', // Azul mais claro para botões ou destaques
-  lightOrange: '#ffcc80', // Laranja mais claro
+  primaryBlue: '#3498db',
+  secondaryOrange: '#e67e22',
+  lightBlue: '#81d4fa',
+  lightOrange: '#ffcc80',
   darkGray: '#333',
-  lightGray: '#f0f2f5', // Um cinza bem claro para fundos secundários
-  successGreen: '#2ecc71', // Verde para sucesso
-  warningYellow: '#f1c40f', // Amarelo para atenção
+  lightGray: '#f0f2f5',
+  successGreen: '#2ecc71',
+  warningYellow: '#f1c40f',
 };
 
 const PageWrapper = styled.div`
   padding: 40px;
-  background-color: white; /* Fundo branco como solicitado */
-  min-height: calc(100vh - 80px); /* Ajusta a altura mínima para ocupar a tela */
-  box-sizing: border-box; /* Garante que padding não aumente o tamanho */
-  font-family: 'Inter', 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; /* Fonte moderna e limpa */
+  background-color: white;
+  min-height: calc(100vh - 80px);
+  box-sizing: border-box;
+  font-family: 'Inter', 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
 `;
 
 const Header = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 40px; /* Mais espaço para o cabeçalho */
+  margin-bottom: 40px;
 `;
 
 const Title = styled.h1`
-  font-size: 3.5rem; /* Título maior */
+  font-size: 3.5rem;
   color: ${colors.darkGray};
   letter-spacing: 1px;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.05); /* Sombra suave para profundidade */
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.05);
 `;
 
 const ActionButtons = styled.div`
   display: flex;
-  gap: 20px; /* Mais espaço entre os botões */
+  gap: 20px;
 `;
 
 const Button = styled.button`
   padding: 15px 30px;
-  border-radius: 8px; /* Cantos mais arredondados */
-  border: none; /* Sem borda para um look mais limpo */
-  font-weight: 600; /* Texto mais encorpado */
+  border-radius: 8px;
+  border: none;
+  font-weight: 600;
   font-size: 1.05rem;
   cursor: pointer;
-  transition: all 0.3s ease; /* Transição suave para hover */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra padrão para todos os botões */
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 
   &.new-client {
     background-color: ${colors.primaryBlue};
     color: white;
     &:hover {
-      background-color: #2980b9; /* Azul um pouco mais escuro no hover */
-      transform: translateY(-2px); /* Efeito de "levantar" */
+      background-color: #2980b9;
+      transform: translateY(-2px);
       box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
     }
     &:active {
@@ -100,7 +101,7 @@ const Button = styled.button`
     background-color: ${colors.secondaryOrange};
     color: white;
     &:hover {
-      background-color: #d35400; /* Laranja um pouco mais escuro no hover */
+      background-color: #d35400;
       transform: translateY(-2px);
       box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
     }
@@ -113,23 +114,23 @@ const Button = styled.button`
 
 const SearchContainer = styled.div`
   position: relative;
-  margin-bottom: 40px; /* Mais espaço abaixo da busca */
+  margin-bottom: 40px;
 `;
 
 const SearchInput = styled.input`
   width: 100%;
-  padding: 15px 20px; /* Mais padding para conforto */
-  padding-left: 50px; /* Espaço para o ícone de busca */
-  border: 1px solid #ddd; /* Borda mais suave */
-  border-radius: 25px; /* Mais arredondado (pílula) */
+  padding: 15px 20px;
+  padding-left: 50px;
+  border: 1px solid #ddd;
+  border-radius: 25px;
   font-size: 1.1rem;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05); /* Sombra sutil */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
 
   &:focus {
     outline: none;
-    border-color: ${colors.lightBlue}; /* Borda azul no foco */
-    box-shadow: 0 0 0 3px rgba(129, 212, 250, 0.3); /* Sombra de foco azul */
+    border-color: ${colors.lightBlue};
+    box-shadow: 0 0 0 3px rgba(129, 212, 250, 0.3);
   }
 
   &::placeholder {
@@ -144,34 +145,45 @@ const SearchIcon = styled.span`
   transform: translateY(-50%);
   color: #999;
   font-size: 1.2rem;
-  /* Use um ícone real aqui, por exemplo, de uma biblioteca como FontAwesome */
-  /* Para este exemplo, vou usar um "lupa" textual */
-  content: "🔍"; /* Caractere de lupa unicode */
+  content: "🔍";
 `;
-
 
 const ClientList = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Layout responsivo com grid */
-  gap: 25px; /* Espaço entre os cards */
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 25px;
 `;
 
 function ClientesAnimaisPage() {
   const [searchTerm, setSearchTerm] = useState('');
-  
+  const [isModalOpen, setIsModalOpen] = useState(false); // Estado para controlar o modal
+  const [clients, setClients] = useState(initialMockClients); // Usar um estado mutável para clientes
+
   // Lógica simples de filtro
-  const filteredClients = mockClients.filter(client => 
+  const filteredClients = clients.filter(client => 
     client.nome.toLowerCase().includes(searchTerm.toLowerCase()) ||
     client.cpf.includes(searchTerm) ||
     client.animais.some(animal => animal.nome.toLowerCase().includes(searchTerm.toLowerCase()))
   );
+
+  const handleOpenModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
+
+  const handleAddClient = (newClient) => {
+    setClients(prevClients => [...prevClients, newClient]); // Adiciona o novo cliente à lista
+  };
 
   return (
     <PageWrapper>
       <Header>
         <Title>Clientes e Animais</Title>
         <ActionButtons>
-          <Button className="new-client">Novo Cliente</Button>
+          <Button className="new-client" onClick={handleOpenModal}>Novo Cliente</Button>
           <Button className="new-animal">Novo Animal</Button>
         </ActionButtons>
       </Header>
@@ -183,7 +195,7 @@ function ClientesAnimaisPage() {
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
         />
-        <SearchIcon>🔍</SearchIcon> {/* Ícone de lupa */}
+        <SearchIcon>🔍</SearchIcon>
       </SearchContainer>
 
       <ClientList>
@@ -195,6 +207,11 @@ function ClientesAnimaisPage() {
           <p>Nenhum cliente ou animal encontrado.</p>
         )}
       </ClientList>
+
+      {/* O Modal é renderizado aqui, com o formulário como seu filho */}
+      <Modal isOpen={isModalOpen} onClose={handleCloseModal}>
+        <NewClientForm onClientAdded={handleAddClient} onClose={handleCloseModal} />
+      </Modal>
     </PageWrapper>
   );
 }

@@ -3,10 +3,9 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import MainLayout from './layouts/MainLayout';
 import LoginPage from './pages/LoginPage';
 import ClientesAnimaisPage from './pages/ClientesAnimaisPage';
+import HomePage from './pages/InicioPage';
 
 // Componente simples para a página inicial
-const HomePage = () => <h1>Página Inicial</h1>;
-
 function App() {
   return (
     <Router>
