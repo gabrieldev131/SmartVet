@@ -68,7 +68,7 @@ function Navbar() {
         <LogoImage src={SmartPetLogo} alt="SmartPet Logo" />
       </LogoContainer>
       <NavButton to="/" active={location.pathname === '/'}>Início</NavButton>
-      <NavButton>Fila de Atendimento</NavButton>
+      <NavButton to="/fila-atendimento" active={location.pathname === '/fila-atendimento'}>Fila de Atendimento</NavButton>
       <NavButton to="/clientes-e-animais" active={location.pathname === '/clientes-e-animais'}>Clientes e Animais</NavButton>
     
     </NavContainer>

@@ -4,6 +4,7 @@ import MainLayout from './layouts/MainLayout';
 import LoginPage from './pages/LoginPage';
 import ClientesAnimaisPage from './pages/ClientesAnimaisPage';
 import HomePage from './pages/InicioPage';
+import FilaPage from './pages/FilaPage';
 
 // Componente simples para a página inicial
 function App() {
@@ -22,6 +23,11 @@ function App() {
         <Route path="/clientes-e-animais" element={
           <MainLayout>
             <ClientesAnimaisPage />
+          </MainLayout>
+        } />
+        <Route path="/fila-atendimento" element={
+          <MainLayout>
+            <FilaPage />
           </MainLayout>
         } />
 
