@@ -1,142 +1,153 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+// Certifique-se que o caminho para sua imagem está correto!
+import SmartVetGato from '../imgs/gato.png';
 
-// -------------------- STYLES --------------------
-// (Estilos criados com styled-components para replicar o protótipo)
+// Paleta de cores para consistência
+const colors = {
+  primaryBlue: '#3498db', // Azul vibrante
+  secondaryOrange: '#e67e22', // Laranja energético
+  lightBlue: '#81d4fa', // Azul mais claro
+  darkGray: '#333',
+  mediumGray: '#555',
+  lightGrayBg: '#f0f4f8', // Fundo claro da página
+  buttonHoverBlue: '#2980b9', // Azul mais escuro para hover
+};
 
 const PageContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
-  background-color: #f0f4f8;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  min-height: 100vh; /* Usa min-height para garantir que o conteúdo ocupe a tela */
+  background-color: ${colors.lightGrayBg};
+  font-family: 'Inter', 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  padding: 20px; /* Adiciona padding para telas menores */
+  box-sizing: border-box;
 `;
 
 const LoginWrapper = styled.div`
   display: flex;
   background-color: white;
-
-  border-radius: 25px;
-  box-shadow: 10px 10px 0px rgba(0, 0, 0, 0.1);
+  border-radius: 20px; /* Arredondamento suave */
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15); /* Sombra mais pronunciada e moderna */
   overflow: hidden;
+  max-width: 900px; /* Limita a largura total */
+  width: 100%; /* Garante que ocupe a largura disponível */
+
+  @media (max-width: 768px) {
+    flex-direction: column; /* Em telas menores, painéis ficam um sobre o outro */
+    max-width: 450px;
+  }
 `;
 
 const FormPanel = styled.div`
-  flex: 1;
-  padding: 40px 60px;
+  flex: 1; /* Ocupa metade do espaço */
+  padding: 50px 40px; /* Padding ajustado */
   display: flex;
   flex-direction: column;
   justify-content: center;
+
+  @media (max-width: 768px) {
+    padding: 30px 25px;
+  }
 `;
 
 const Title = styled.h1`
   font-size: 3.5rem;
   font-weight: 400;
-  margin:auto;
-  margin-bottom: 30px;
-  color: #333;
+  margin: auto;
+  margin-bottom: 40px; /* Mais espaço abaixo do título */
+  color: ${colors.darkGray};
+  text-align: center;
+  letter-spacing: 1px;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.05);
 `;
 
 const Input = styled.input`
   width: 100%;
-  padding: 15px;
+  padding: 15px 20px;
   margin-bottom: 20px;
-  border: 2px solid #333;
-  border-radius: 15px;
+  border: 1px solid #ddd; /* Borda mais suave */
+  border-radius: 10px; /* Cantos arredondados */
   font-size: 1rem;
+  color: ${colors.mediumGray};
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05); /* Sombra interna sutil */
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
 
   &:focus {
     outline: none;
-    border-color: #007bff;
+    border-color: ${colors.primaryBlue}; /* Borda azul no foco */
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2); /* Sombra de foco azul */
+  }
+
+  &::placeholder {
+    color: #aaa;
   }
 `;
 
 const OptionsWrapper = styled.div`
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end; /* Alinha "Esqueceu a senha?" à direita */
   align-items: center;
-  margin-bottom: 25px;
-`;
-
-const CheckboxWrapper = styled.label`
-  display: flex;
-  align-items: center;
-  cursor: pointer;
-  
-  input {
-    margin-right: 8px;
-  }
+  margin-bottom: 30px;
 `;
 
 const StyledLink = styled.a`
-  color: #007bff;
+  color: ${colors.primaryBlue}; /* Link com cor azul principal */
   text-decoration: none;
-  font-weight: 500;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: color 0.2s ease, text-decoration 0.2s ease;
 
   &:hover {
+    color: ${colors.buttonHoverBlue};
     text-decoration: underline;
   }
 `;
 
 const LoginButton = styled.button`
   width: 100%;
-  padding: 15px;
-  background-color: #e0f7ff;
-  border-radius: 15px;
-  font-size: 1.2rem;
-  font-weight: bold;
+  padding: 18px; /* Mais padding para o botão */
+  background-color: ${colors.secondaryOrange}; /* Laranja vibrante */
+  color: white;
+  border: none;
+  border-radius: 10px; /* Cantos arredondados */
+  font-size: 1.25rem; /* Fonte um pouco maior */
+  font-weight: 700; /* Mais encorpado */
   cursor: pointer;
-  transition: background-color 0.2s;
-  
-  &:hover {
-    background-color: #b3e5fc;
-  }
-`;
+  transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); /* Sombra sutil */
 
-const SignUpText = styled.p`
-  margin-top: 30px;
-  text-align: center;
-  color: #555;
+  &:hover {
+    background-color: #d35400; /* Laranja mais escuro no hover */
+    transform: translateY(-3px); /* Efeito de levantar */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  }
+  &:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
 `;
 
 const GraphicPanel = styled.div`
-  flex: 1;
-  background-color: #b3e5fc;
+  flex: 1; /* Ocupa metade do espaço */
+  background: linear-gradient(to bottom right, ${colors.primaryBlue}, ${colors.lightBlue}); /* Gradiente azul */
   display: flex;
   justify-content: center;
   align-items: center;
-`;
+  padding: 20px; /* Adiciona padding para garantir que a imagem não encoste nas bordas */
 
-const CatIcon = styled.div`
-  width: 150px;
-  height: 150px;
-  background-color: #ffb74d;
-  border-radius: 50%;
-  position: relative;
-  
-  /* As "orelhas" do gato/logo */
-  &::before, &::after {
-    content: '';
-    position: absolute;
-    width: 0;
-    height: 0;
-    border-left: 40px solid transparent;
-    border-right: 40px solid transparent;
-    border-bottom: 60px solid #ff9800;
-    top: -30px;
-  }
-
-  &::before {
-    transform: rotate(-45deg);
-    left: -15px;
-  }
-
-  &::after {
-    transform: rotate(45deg);
-    right: -15px;
+  @media (max-width: 768px) {
+    min-height: 250px; /* Altura mínima para o painel gráfico em mobile */
   }
 `;
+
+const GraphicImage = styled.img`
+  max-width: 90%; /* Garante que a imagem se ajuste ao painel */
+  height: auto;
+  filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.2)); /* Sombra forte para destacar a imagem */
+`;
+
 
 // -------------------- COMPONENT --------------------
 
@@ -148,6 +159,7 @@ function LoginPage() {
     e.preventDefault();
     // Futuramente, a lógica de login com a API virá aqui
     alert(`Login tentado com:\nEmail: ${email}\nSenha: ${senha}`);
+    // Exemplo: navigate('/dashboard'); // Usaria o useNavigate do react-router-dom
   };
 
   return (
@@ -160,26 +172,26 @@ function LoginPage() {
               type="email" 
               placeholder="Email"
               value={email}
-              onChange={(e) => setEmail(e.target.value)} 
+              onChange={(e) => setEmail(e.target.value)}
+              required /* Torna o campo obrigatório */
             />
             <Input 
               type="password" 
               placeholder="Senha" 
               value={senha}
               onChange={(e) => setSenha(e.target.value)}
+              required /* Torna o campo obrigatório */
             />
             <OptionsWrapper>
               <StyledLink href="#">Esqueceu a senha?</StyledLink>
             </OptionsWrapper>
-            <LoginButton type="submit">Login</LoginButton>
+            <LoginButton to="/" active={location.pathname === '/'} >Login</LoginButton>
           </form>
-          {/* <SignUpText>
-            Novo por aqui? <StyledLink href="#">Cadastre-se</StyledLink>
-          </SignUpText> */}
         </FormPanel>
         
         <GraphicPanel>
-          <CatIcon />
+          {/* CORREÇÃO AQUI: Use a imagem como 'src' de uma tag <img> */}
+          <GraphicImage src={SmartVetGato} alt="SmartPet Login Graphic" />
         </GraphicPanel>
 
       </LoginWrapper>
