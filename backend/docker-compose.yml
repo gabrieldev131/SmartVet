@@ -24,4 +24,4 @@ services:
     depends_on:
       - sqlserver
     environment:
-      SqlServer: "Server=sqlserver,1433;Database=smartvet;User ID=sa;Password=Senha@123;Trusted_Connection=False;TrustServerCertificate=True;"
+      PostgreSql: ${PostgreSql}
