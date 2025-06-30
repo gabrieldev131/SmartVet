@@ -35,7 +35,7 @@ const LogoImage = styled.img`
 
 const NavButton = styled(Link)`
   width: 100%;
-  padding: 15px 20px; /* Padding ajustado */
+  padding: 15px 10px; /* Padding ajustado */
   margin-bottom: 15px; /* Mais espaço entre os botões */
   background-color: ${props => props.active ? '#81d4fa' : '#e3f2fd'}; /* Azuis mais vibrantes para os estados */
   color: ${props => props.active ? '#ffffff' : '#0d214f'}; /* Cor do texto */
@@ -67,8 +67,11 @@ function Navbar() {
       <LogoContainer>
         <LogoImage src={SmartPetLogo} alt="SmartPet Logo" />
       </LogoContainer>
+
       <NavButton to="/" active={location.pathname === '/'}>Início</NavButton>
+
       <NavButton to="/fila-atendimento" active={location.pathname === '/fila-atendimento'}>Fila de Atendimento</NavButton>
+      
       <NavButton to="/clientes-e-animais" active={location.pathname === '/clientes-e-animais'}>Clientes e Animais</NavButton>
     
     </NavContainer>

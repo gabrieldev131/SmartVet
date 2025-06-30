@@ -15,19 +15,22 @@ const colors = {
 
 const HomePageWrapper = styled.div`
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
-  min-height: calc(100vh - 80px); /* Ajusta a altura para ocupar o restante da tela */
-  background-color: white; /* Fundo branco como solicitado */
-  padding: 40px;
-  box-sizing: border-box;
+  height: 100%;
+  background-color: white;
+`;
+
+const ContentContainer = styled.div`
+  font-family: 'Arial', sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   text-align: center;
-  font-family: 'Inter', 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  max-width: 800px;
 `;
 
 const LogoContainer = styled.div`
-  margin-bottom: 40px;
   animation: fadeIn 1s ease-out; /* Animação de fade-in */
 
   @keyframes fadeIn {
@@ -43,14 +46,14 @@ const LogoContainer = styled.div`
 `;
 
 const LogoImage = styled.img`
-  width: 250px; /* Tamanho maior para destaque na home */
+  width: 200px;
   height: auto;
 `;
 
 const WelcomeTitle = styled.h1`
+  margin: 20px 0;
   font-size: 4.5rem; /* Título bem grande */
   color: ${colors.primaryBlue};
-  margin-bottom: 20px;
   letter-spacing: 2px;
   text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.1);
   animation: slideInLeft 1s ease-out forwards; /* Animação de deslize da esquerda */
@@ -73,7 +76,6 @@ const WelcomeText = styled.p`
   color: ${colors.mediumGray};
   line-height: 1.6;
   max-width: 700px;
-  margin-bottom: 50px;
   animation: fadeIn 1.5s ease-out 0.5s forwards; /* Animação de fade-in com delay */
   opacity: 0; /* Começa invisível para a animação */
 `;
@@ -81,6 +83,7 @@ const WelcomeText = styled.p`
 const CallToAction = styled.a`
   background-color: ${colors.secondaryOrange};
   color: white;
+  margin:10px;
   padding: 18px 40px;
   border-radius: 30px; /* Botão em formato de pílula */
   text-decoration: none;
@@ -105,7 +108,9 @@ const CallToAction = styled.a`
 function HomePage() {
   return (
     <HomePageWrapper>
-      <LogoContainer>
+      
+      <ContentContainer>
+        <LogoContainer>
         <LogoImage src={SmartPetLogo} alt="SmartPet Logo" />
       </LogoContainer>
       <WelcomeTitle>Bem-vindo ao SmartVet!</WelcomeTitle>
@@ -116,6 +121,8 @@ function HomePage() {
       </WelcomeText>
       {/* Exemplo de botão que leva para a página de clientes, use Link do react-router-dom se estiver usando */}
       <CallToAction href="/clientes-e-animais">Começar Agora</CallToAction>
+      </ContentContainer>
+      
     </HomePageWrapper>
   );
 }

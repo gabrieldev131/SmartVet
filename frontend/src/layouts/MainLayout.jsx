@@ -10,6 +10,7 @@ const LayoutContainer = styled.div`
 const Content = styled.main`
   flex-grow: 1; /* Ocupa o espaço restante */
   height: 100vh;
+  overflow-x: hidden;
   overflow-y: auto; /* Adiciona scroll se o conteúdo for grande */
 `;
 
