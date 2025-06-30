@@ -7,6 +7,7 @@ using SmartVet.Infrastructure.Security.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Npgsql.EntityFrameworkCore.PostgreSQL;
 using SmartVet.Infrastructure.Repositories.Common;
 
 
@@ -16,8 +17,8 @@ namespace SmartVet.Infrastructure
     {
         public static void ConfigurePersistenceApp(this IServiceCollection services, IConfiguration configuration)
         {
-            var connectionString = Environment.GetEnvironmentVariable("SqlServer");
-            IServiceCollection serviceCollection = services.AddDbContext<AppDbContext>(opt => opt.UseSqlServer(connectionString, x => x.MigrationsAssembly("SmartVet.Infrastructure")), ServiceLifetime.Scoped);
+            var connectionString = Environment.GetEnvironmentVariable("PostgreSql");
+            IServiceCollection serviceCollection = services.AddDbContext<AppDbContext>(opt => opt.UseNpgsql(connectionString, x => x.MigrationsAssembly("SmartVet.Infrastructure")), ServiceLifetime.Scoped);
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IUserRepository, UserRepository>();
