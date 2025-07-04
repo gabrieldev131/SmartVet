@@ -184,14 +184,14 @@ function ClientesAnimaisPage() {
   return (
     <PageWrapper>
       <Header>
-        <Title>Clientes e Animais</Title>
-        <ActionButtons>
+        <Title>Animais</Title>
+        {/* <ActionButtons>
           <Button className="new-client" onClick={handleOpenModal}>Novo Cliente</Button>
           <Button className="new-animal">Novo Animal</Button>
-        </ActionButtons>
+        </ActionButtons> */}
       </Header>
 
-      <SearchContainer>
+      {/*<SearchContainer>
         <SearchInput 
           type="text"
           placeholder="Buscar Usuário, CPF ou Animal..."
@@ -201,7 +201,7 @@ function ClientesAnimaisPage() {
         <SearchIcon>🔍</SearchIcon>
       </SearchContainer>
       
-      {/* <ClientList>
+       <ClientList>
         {filteredClients.length > 0 ? (
           filteredClients.map(client => (
             <ClientCard key={client.id} client={client} />

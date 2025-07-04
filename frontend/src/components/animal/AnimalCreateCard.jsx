@@ -17,6 +17,11 @@ function AnimalCreateForm({ initialAnimal = {}, onSave, onCancel }) {
         birth_year: initialAnimal.birth_year || new Date().getFullYear(),
     });
 
+    const handleChange = (e) => {
+      const { name, value } = e.target;
+      setForm((prev) => ({ ...prev, [name]: value }));
+    };
+
     const handleSubmit = (e) => {
         e.preventDefault();
         onSave(form); // não precisa de ID

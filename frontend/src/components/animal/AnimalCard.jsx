@@ -11,8 +11,6 @@ export function AnimalCard({ animal, onUpdate, onDelete }) {
   const handleSave = async (updatedAnimal) => {
     try {
       const animal = new Animal({id: updatedAnimal.id, animal_name: updatedAnimal.animal_name, specie: updatedAnimal.specie, breed: updatedAnimal.breed, birth_year: updatedAnimal.birth_year, weight: updatedAnimal.weight})
-      console.log(updatedAnimal) // print de teste
-      console.log(animal) // print de teste
       const response = await AnimalUpdate(animal.id, animal)
       onUpdate?.(updatedAnimal);        // avisa o pai (opcional)
       setIsEditing(false);
