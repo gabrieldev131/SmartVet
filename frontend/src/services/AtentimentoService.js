@@ -3,15 +3,32 @@ import api from "./api"
 const endpoint = `/SmartVet/Apointment`
 
 export const atendimentoService = {
-    getAll: () => api.get(endpoint),
+    async getAll() {
+        const response = await api.get(endpoint);
+        return response.data.map(item => new Appointment(item));
+    },
 
-    getById: id => api.get(`${endpoint}/${id}`),
+    async getById(id) {
+        const response = await api.get(`${endpoint}/${id}`);
+        return new Appointment(response.data);
+    },
 
-    create: payload => api.post(endpoint, payload),
+    async create(appointment) {
+        const payload = appointment.toJsonWithoutId();
+        const response = await api.post(endpoint, payload);
+        return new StatusCode(response.status, response.statusText)
+    },
 
-    update: (id, payload) => api.put(`${endpoint}/${id}`, payload),
+    async update(id, appointment) {
+        const payload = appointment.toJsonWithId();
+        const response = await api.put(`${endpoint}/${id}`, payload);
+        return new StatusCode(response.status, response.statusText)
+    },
 
-    delete: id => api.delete(`${endpoint}/${id}`)
+    async delete(id) {
+        const response = await api.delete(`${endpoint}/${id}`);
+        return new StatusCode(response.status, response.statusText)
+    }
 }
 
 // exemplo de uso
@@ -22,3 +39,73 @@ export const atendimentoService = {
 // { data, status } = atendimentoService.delete(id)
 
 // OBS: id e payload devem ser no formato especificado no Swagger
+
+export class Appointment {
+    constructor({ id, scheduled_date, urgency, result_description, animalId }) {
+        this.id = id;
+        this.scheduledDate = new Date(scheduled_date);
+        this.urgency = urgency;
+        this.resultDescription = result_description;
+        this.animalId = animalId;
+    }
+
+    get formattedDate() {
+        return this.scheduledDate.toLocaleString('pt-BR');
+    }
+
+    toJsonWithId() {
+        return {
+            id: this.id,
+            scheduled_date: this.scheduledDate.toISOString(),
+            urgency: this.urgency,
+            result_description: this.resultDescription,
+            animalId: this.animalId
+        };
+    }
+
+    toJsonWithoutId() {
+        return {
+            scheduled_date: this.scheduledDate.toISOString(),
+            urgency: this.urgency,
+            result_description: this.resultDescription,
+            animalId: this.animalId
+        };
+    }
+}
+
+// StatusCode é o retorno de alguns services, importante para verificar se as operações ocorreram com sucesso
+class StatusCode {
+    status
+    mensagem
+    constructor(status, mensagem) {
+        this.status = status
+        this.mensagem = mensagem
+    }
+
+    getStatus() {
+        return `${this.status}: ${this.mensagem}`
+    }
+}
+
+// Essas são as funções efetivamente usadas
+export async function AtendimentoGetAll() {
+    const res = await animalService.getAll()
+    return await res
+}
+
+export async function AtendimentoGetById(id) {
+    const res = await animalService.getById(id)
+    return await res
+}
+
+export async function AtendimentoCreate(animal) {
+    const res = await animalService.create(animal)
+}
+
+export async function AtendimentoUpdate(id, animal) {
+    const res = await animalService.update(id, animal)
+}
+
+export async function AtendimentoDelete(id) {
+    const res = await animalService.delete(id)
+}
