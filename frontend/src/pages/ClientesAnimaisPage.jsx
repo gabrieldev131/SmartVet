@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import ClientCard from '../components/ClientCard';
 import Modal from '../components/Modal'; // Importe o Modal
 import NewClientForm from '../components/NovoClienteForm'; // Importe o formulário
+
+import AnimalList from '../components/animal/AnimalList'; // importação do componente da lista de animais
 
 // Dados de exemplo (mock data) - Tornamos mutável para adicionar novos clientes
 const initialMockClients = [
@@ -198,8 +200,8 @@ function ClientesAnimaisPage() {
         />
         <SearchIcon>🔍</SearchIcon>
       </SearchContainer>
-
-      <ClientList>
+      
+      {/* <ClientList>
         {filteredClients.length > 0 ? (
           filteredClients.map(client => (
             <ClientCard key={client.id} client={client} />
@@ -207,7 +209,9 @@ function ClientesAnimaisPage() {
         ) : (
           <p>Nenhum cliente ou animal encontrado.</p>
         )}
-      </ClientList>
+      </ClientList> */}
+
+      <AnimalList />
 
       {/* O Modal é renderizado aqui, com o formulário como seu filho */}
       <Modal isOpen={isModalOpen} onClose={handleCloseModal}>

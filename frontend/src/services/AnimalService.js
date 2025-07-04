@@ -34,7 +34,7 @@ const animalService = {
 // Classe animal para facilitar o uso
 export class Animal{
     animal_name
-    birth_year 
+    birth_year
     breed
     id
     specie
