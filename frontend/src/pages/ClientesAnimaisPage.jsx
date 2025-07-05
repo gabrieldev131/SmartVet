@@ -158,6 +158,7 @@ const ClientList = styled.div`
 `;
 
 function ClientesAnimaisPage() {
+  
   const [searchTerm, setSearchTerm] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false); // Estado para controlar o modal
   const [clients, setClients] = useState(initialMockClients); // Usar um estado mutável para clientes

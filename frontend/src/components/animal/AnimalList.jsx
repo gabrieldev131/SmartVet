@@ -1,13 +1,16 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { Animal, AnimalCreate, AnimalGetAll } from '../../services/AnimalService';
 import { AnimalCard } from './AnimalCard';
-import { Card, CardButton, FilterInput, FilterButton, FilterDiv, NewAnimalButton, AnimalListDiv, AnimalCardDiv } from './AnimalStyle';
+import { Card, CardButton, FilterInput, FilterButton, FilterDiv, NewAnimalButton, AnimalListDiv, AnimalCardDiv, SearchContainer, SearchIcon, SearchInput } from './AnimalStyle';
 import AnimalCreateForm from './AnimalCreateCard'
+import Modal from '../Modal';
 
 function AnimalList() {
   const [animals, setAnimals] = useState([]);     // aqui o estado que o React observa
   const [loading, setLoading] = useState(true);
   const [creating, setCreating] = useState(false);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [filter, setFilterSection] = useState(false)
   const [filterInputs, setFilterInputs] = useState({
     name: '',
     breed: '',
@@ -38,6 +41,14 @@ function AnimalList() {
     fetchAnimals();
   }, []);
 
+  const searchedAnimals = animals.filter(animal =>
+    animal?.animal_name?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    animal?.breed?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    animal?.specie?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    String(animal?.birth_year) === String(searchTerm) ||
+    String(animal?.weight) === searchTerm
+  );
+
   const filteredAnimals = useMemo(() => {
     return animals.filter((a) =>
       (!filters.name ||
@@ -64,7 +75,7 @@ function AnimalList() {
 
   const handleCreated = async (createdAnimal) => {
     try {
-      const animal = new Animal({id: createdAnimal.id, animal_name: createdAnimal.animal_name, specie: createdAnimal.specie, breed: createdAnimal.breed, birth_year: createdAnimal.birth_year, weight: createdAnimal.weight})
+      const animal = new Animal({ id: createdAnimal.id, animal_name: createdAnimal.animal_name, specie: createdAnimal.specie, breed: createdAnimal.breed, birth_year: createdAnimal.birth_year, weight: createdAnimal.weight })
       await AnimalCreate(animal);
       const data = await AnimalGetAll();
       setAnimals(data);
@@ -77,6 +88,13 @@ function AnimalList() {
   const handleFilterChange = (e) =>
     setFilters((prev) => ({ ...prev, [e.target.name]: e.target.value }));
 
+  const handleSearchChange = (e) => {
+    setSearchTerm(e.target.value);
+  };
+
+  const handleFilterButton = () => {
+    setFilterSection(!filter)
+  }
   const handleInputChange = (e) =>
     setFilterInputs((prev) => ({
       ...prev,
@@ -107,68 +125,99 @@ function AnimalList() {
 
   return (
     <AnimalListDiv>
-      <FilterDiv>
-        <FilterInput
-          name="name"
-          placeholder="Filtrar por nome"
-          value={filters.name}
-          onChange={handleFilterChange}
-          className="input"
-        />
-        <FilterInput
-          name="breed"
-          placeholder="Filtrar por raça"
-          value={filters.breed}
-          onChange={handleFilterChange}
-          className="input"
-        />
-        <FilterInput
-          name="specie"
-          placeholder="Filtrar por espécie"
-          value={filters.specie}
-          onChange={handleFilterChange}
-          className="input"
-        />
-        <FilterInput
-          name="birth_year"
-          placeholder="Filtrar por ano de nascimento"
-          type="number"
-          value={filters.birth_year}
-          onChange={handleFilterChange}
-          className="input"
-        />
-        <FilterInput
-          name="weight"
-          placeholder="Filtrar por peso (kg)"
-          type="number"
-          value={filters.weight}
-          onChange={handleFilterChange}
-          className="input"
-        />
+      {!filter && (
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%' }}>
+          <SearchContainer>
+            <SearchInput
+              type="text"
+              placeholder="Buscar Animal..."
+              value={searchTerm}
+              onChange={handleSearchChange}
+              className="input"
+            />
+            <SearchIcon>🔍</SearchIcon>
+          </SearchContainer>
+          <FilterButton className="edit" onClick={handleFilterButton}>
+            {filter ? 'Fechar Filtros' : 'Abrir Filtros'}
+          </FilterButton>
+        </div>
+      )}
+      {filter && (
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%' }}>
+          <FilterDiv>
+            <FilterInput
+              name="name"
+              placeholder="Filtrar por nome"
+              value={filters.name}
+              onChange={handleFilterChange}
+              className="input"
+            />
 
-        <FilterButton className="delete" onClick={handleClearFilters}>
-            Limpar filtros
-        </FilterButton>
-      </FilterDiv>
+            <FilterInput
+              name="specie"
+              placeholder="Filtrar por espécie"
+              value={filters.specie}
+              onChange={handleFilterChange}
+              className="input"
+            />
 
-      <NewAnimalButton className="edit" onClick={() => setCreating(true)}>
+            <FilterInput
+              name="breed"
+              placeholder="Filtrar por raça"
+              value={filters.breed}
+              onChange={handleFilterChange}
+              className="input"
+            />
+
+            <FilterInput
+              name="weight"
+              placeholder="Filtrar por peso (kg)"
+              type="number"
+              value={filters.weight}
+              onChange={handleFilterChange}
+              className="input"
+            />
+
+            <FilterInput
+              name="birth_year"
+              placeholder="Filtrar por ano de nascimento"
+              type="number"
+              value={filters.birth_year}
+              onChange={handleFilterChange}
+              className="input"
+            />
+
+            <FilterButton className="delete" onClick={handleClearFilters}>
+              Limpar filtros
+            </FilterButton>
+          </FilterDiv>
+
+          <FilterButton className="edit" onClick={handleFilterButton}>
+            {filter ? 'Fechar Filtros' : 'Abrir Filtros'}
+          </FilterButton>
+        </div>
+      )}
+
+      <NewAnimalButton className="new-animal" onClick={() => setCreating(true)}>
         Novo Animal
       </NewAnimalButton>
 
       {creating && (
-        <AnimalCreateForm
-          onSave={handleCreated}
-          onCancel={() => setCreating(false)}
-        />
+        <Modal isOpen={creating} onClose={() => setCreating(false)}>
+          <AnimalCreateForm
+            onSave={handleCreated}
+            onCancel={() => setCreating(false)}
+          />
+        </Modal>
       )}
 
       {/* {animals.map((animal) => (
         <AnimalCard key={animal.id} animal={animal} onUpdate={handleUpdated} onDelete={handleDeleted} />
       ))} */}
       <AnimalCardDiv>
-        {filteredAnimals.length === 0 ? (
+        {(filteredAnimals.length === 0) ? (
           <p>Nenhum animal encontrado.</p>
-        ) : (
+        ) : (filter && (
           filteredAnimals.map((animal) => (
             <AnimalCard
               key={animal.id}
@@ -176,8 +225,20 @@ function AnimalList() {
               onUpdate={handleUpdated}
               onDelete={handleDeleted}
             />
+          )
           ))
-        )}
+
+        )
+        }
+        {!filter &&
+          searchedAnimals.map((animal) => (
+            <AnimalCard
+              key={animal.id}
+              animal={animal}
+              onUpdate={handleUpdated}
+              onDelete={handleDeleted}
+            />))
+        }
       </AnimalCardDiv>
     </AnimalListDiv>
   );

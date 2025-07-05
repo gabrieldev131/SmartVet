@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 // Importe sua imagem da logo
-import SmartPetLogo from '../imgs/logo.png'; // Ajuste o caminho se sua logo estiver em outro lugar
+import SmartPetLogo from '../imgs/gato.png'; // Ajuste o caminho se sua logo estiver em outro lugar
 
 // Paleta de cores (para consistência)
 const colors = {
@@ -46,7 +46,7 @@ const LogoContainer = styled.div`
 `;
 
 const LogoImage = styled.img`
-  width: 200px;
+  width: 100px;
   height: auto;
 `;
 

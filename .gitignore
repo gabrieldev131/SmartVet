@@ -21,6 +21,7 @@
 # Use .env.example para fornecer um modelo para outros desenvolvedores.
 .env.local
 .env.*.local
+.env
 
 # Arquivos de log
 # Estes arquivos são gerados para fins de depuração e não precisam ser versionados.

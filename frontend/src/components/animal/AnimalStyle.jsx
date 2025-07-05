@@ -210,6 +210,11 @@ export const  NewAnimalButton = styled.button`
   margin-bottom: 16px;
   width: 190px;
 
+  &.new-animal {
+    color: white;
+    background-color: ${colors.successGreen};
+  }
+
   &.edit {
     background-color: ${colors.primaryBlue};
     color: white;
@@ -237,4 +242,42 @@ export const  NewAnimalButton = styled.button`
       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     }
   }
+`;
+
+export const SearchContainer = styled.div`
+  position: relative;
+  margin-bottom: 40px;
+  width: 80%;
+`;
+
+export const SearchInput = styled.input`
+  width: 100%;
+  box-sizing: border-box;
+  padding: 15px 20px;
+  padding-left: 50px;
+  border: 1px solid #ddd;
+  border-radius: 25px;
+  font-size: 1.1rem;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+
+  &:focus {
+    outline: none;
+    border-color: ${colors.lightBlue};
+    box-shadow: 0 0 0 3px rgba(129, 212, 250, 0.3);
+  }
+
+  &::placeholder {
+    color: #999;
+  }
+`;
+
+export const SearchIcon = styled.span`
+  position: absolute;
+  left: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #999;
+  font-size: 1.2rem;
+  content: "🔍";
 `;
