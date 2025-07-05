@@ -11,6 +11,28 @@ const colors = {
   warningYellow: '#f1c40f',
 };
 
+export const AnimalListDiv = styled.div`
+  padding: 16px;
+  background: #fdfdfd;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
+
+export const AnimalCardDiv = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  width: 80%;
+  max-width: 75%;
+  padding: 16px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+`
+
 export const Card = styled.div`
   border: 1px solid #ccc;
   padding: 16px;
@@ -105,5 +127,114 @@ export const FormInput = styled.input`
   border-radius: 4px;
 `;
 
+export const FilterDiv = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  row-gap: 16px;
+  width: 80%;
+  padding: 16px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+`;
+
 export const FilterInput = styled.input`
-`
+  width: 100%;
+  box-sizing: border-box;
+  padding: 15px 20px;
+  padding-left: 50px;
+  border: 1px solid #ddd;
+  border-radius: 25px;
+  font-size: 1.05rem;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+
+  outline: none;
+  border-color: ${colors.lightBlue};
+  box-shadow: 0 0 0 3px rgba(129, 212, 250, 0.3);
+  margin-left: 4px
+  margin-right: 4px
+`;
+
+export const FilterButton = styled.button`
+  padding: 15px 30px;
+  border-radius: 8px;
+  border: none;
+  font-weight: 600;
+  font-size: 1.05rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+
+  &.edit {
+    background-color: ${colors.primaryBlue};
+    color: white;
+    &:hover {
+      background-color: #2980b9;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    }
+    &:active {
+      transform: translateY(0);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+  }
+
+  &.delete {
+    background-color: ${colors.secondaryOrange};
+    color: white;
+    &:hover {
+      background-color: #d35400;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    }
+    &:active {
+      transform: translateY(0);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+  }
+`;
+
+export const  NewAnimalButton = styled.button`
+  padding: 15px 30px;
+  border-radius: 8px;
+  border: none;
+  font-weight: 600;
+  font-size: 1.05rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-top: 16px;
+  margin-bottom: 16px;
+  width: 190px;
+
+  &.edit {
+    background-color: ${colors.primaryBlue};
+    color: white;
+    &:hover {
+      background-color: #2980b9;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    }
+    &:active {
+      transform: translateY(0);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+  }
+
+  &.delete {
+    background-color: ${colors.secondaryOrange};
+    color: white;
+    &:hover {
+      background-color: #d35400;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    }
+    &:active {
+      transform: translateY(0);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+  }
+`;

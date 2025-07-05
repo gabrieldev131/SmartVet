@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { Animal, AnimalCreate, AnimalGetAll } from '../../services/AnimalService';
 import { AnimalCard } from './AnimalCard';
-import { CardButton, FormInput } from './AnimalStyle';
+import { Card, CardButton, FilterInput, FilterButton, FilterDiv, NewAnimalButton, AnimalListDiv, AnimalCardDiv } from './AnimalStyle';
 import AnimalCreateForm from './AnimalCreateCard'
 
 function AnimalList() {
@@ -106,54 +106,54 @@ function AnimalList() {
   }
 
   return (
-    <div>
-      <div>
-        <FormInput
+    <AnimalListDiv>
+      <FilterDiv>
+        <FilterInput
           name="name"
-          placeholder="Nome"
+          placeholder="Filtrar por nome"
           value={filters.name}
           onChange={handleFilterChange}
           className="input"
         />
-        <FormInput
+        <FilterInput
           name="breed"
-          placeholder="Raça"
+          placeholder="Filtrar por raça"
           value={filters.breed}
           onChange={handleFilterChange}
           className="input"
         />
-        <FormInput
+        <FilterInput
           name="specie"
-          placeholder="Espécie"
+          placeholder="Filtrar por espécie"
           value={filters.specie}
           onChange={handleFilterChange}
           className="input"
         />
-        <FormInput
+        <FilterInput
           name="birth_year"
-          placeholder="Ano de nascimento"
+          placeholder="Filtrar por ano de nascimento"
           type="number"
           value={filters.birth_year}
           onChange={handleFilterChange}
           className="input"
         />
-        <FormInput
+        <FilterInput
           name="weight"
-          placeholder="Peso (kg)"
+          placeholder="Filtrar por peso (kg)"
           type="number"
           value={filters.weight}
           onChange={handleFilterChange}
           className="input"
         />
 
-        <CardButton className="delete" onClick={handleClearFilters}>
+        <FilterButton className="delete" onClick={handleClearFilters}>
             Limpar filtros
-        </CardButton>
-      </div>
+        </FilterButton>
+      </FilterDiv>
 
-      <CardButton className="edit" onClick={() => setCreating(true)}>
+      <NewAnimalButton className="edit" onClick={() => setCreating(true)}>
         Novo Animal
-      </CardButton>
+      </NewAnimalButton>
 
       {creating && (
         <AnimalCreateForm
@@ -165,20 +165,21 @@ function AnimalList() {
       {/* {animals.map((animal) => (
         <AnimalCard key={animal.id} animal={animal} onUpdate={handleUpdated} onDelete={handleDeleted} />
       ))} */}
-
-      {filteredAnimals.length === 0 ? (
-        <p>Nenhum animal encontrado.</p>
-      ) : (
-        filteredAnimals.map((animal) => (
-          <AnimalCard
-            key={animal.id}
-            animal={animal}
-            onUpdate={handleUpdated}
-            onDelete={handleDeleted}
-          />
-        ))
-      )}
-    </div>
+      <AnimalCardDiv>
+        {filteredAnimals.length === 0 ? (
+          <p>Nenhum animal encontrado.</p>
+        ) : (
+          filteredAnimals.map((animal) => (
+            <AnimalCard
+              key={animal.id}
+              animal={animal}
+              onUpdate={handleUpdated}
+              onDelete={handleDeleted}
+            />
+          ))
+        )}
+      </AnimalCardDiv>
+    </AnimalListDiv>
   );
 }
 
