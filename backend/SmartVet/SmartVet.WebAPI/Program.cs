@@ -5,71 +5,82 @@ using SmartVet.WebApi.Extensions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 
-var builder = WebApplication.CreateBuilder(args);
-
-//builder.AddServiceDefaults();
-// Add services to the container.
-builder.Services.ConfigurePersistenceApp(builder.Configuration);
-builder.Services.ConfigureApplicationApp();
-
-builder.Services.ConfigureCorsPolicy();
-
-builder.Services.ODataConfiguration();
-
-builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen(options =>
+internal class Program
 {
-    options.SwaggerDoc("v1", new OpenApiInfo { Title = "SmartVet API", Version = "v1" });
+    private static void Main(string[] args)
+    {
+        var builder = WebApplication.CreateBuilder(args);
 
-    options.ResolveConflictingActions(x => x.First());
+        builder.AddConfiguration();
+        builder.AddJwtAuthentication();
 
-    options.CustomSchemaIds(type => type.ToString());
-});
+        //builder.AddServiceDefaults();
+        // Add services to the container.
+        builder.Services.ConfigurePersistenceApp(builder.Configuration);
+        builder.Services.ConfigureApplicationApp();
 
-#region Adição do Serilog
-//Log.Logger = new LoggerConfiguration()
-//            .MinimumLevel.Debug()
-//            .WriteTo.Console()
-//            .WriteTo.File("logs/myapp.txt", rollingInterval: RollingInterval.Day)
-//            .CreateLogger();
-//builder.Host.UseSerilog(Log.Logger);
-#endregion
+        builder.Services.ConfigureCorsPolicy();
 
-var app = builder.Build();
+        builder.Services.ODataConfiguration();
 
-CreateDatabase(app);
+        builder.Services.AddControllers();
+        // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+        builder.Services.AddEndpointsApiExplorer();
+        builder.Services.AddSwaggerGen(options =>
+        {
+            options.SwaggerDoc("v1", new OpenApiInfo { Title = "SmartVet API", Version = "v1" });
 
-//app.MapDefaultEndpoints();
+            options.ResolveConflictingActions(x => x.First());
 
-// Configure the HTTP Command pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+            options.CustomSchemaIds(type => type.ToString());
+        });
 
-app.UseCors();
+        #region Adição do Serilog
+        //Log.Logger = new LoggerConfiguration()
+        //            .MinimumLevel.Debug()
+        //            .WriteTo.Console()
+        //            .WriteTo.File("logs/myapp.txt", rollingInterval: RollingInterval.Day)
+        //            .CreateLogger();
+        //builder.Host.UseSerilog(Log.Logger);
+        #endregion
 
-app.UseHttpsRedirection();
+        var app = builder.Build();
 
-//app.UseAuthorization();
+        CreateDatabase(app);
 
-app.MapControllers();
+        //app.MapDefaultEndpoints();
 
-app.Run();
+        // Configure the HTTP Command pipeline.
+        if (app.Environment.IsDevelopment())
+        {
+            app.UseSwagger();
+            app.UseSwaggerUI();
+        }
+
+        app.UseCors();
+
+        app.UseHttpsRedirection();
+
+        app.UseAuthentication();
+
+        app.UseAuthorization();
+
+        app.MapControllers();
+
+        app.Run();
 
 
-void CreateDatabase(WebApplication app)
-{
-    var serviceScope = app.Services.CreateScope();
-    var dataContext = serviceScope.ServiceProvider.GetService<AppDbContext>();
-    dataContext?.Database.EnsureCreated();
-    dataContext?.Database.Migrate();
+        void CreateDatabase(WebApplication app)
+        {
+            var serviceScope = app.Services.CreateScope();
+            var dataContext = serviceScope.ServiceProvider.GetService<AppDbContext>();
+            dataContext?.Database.EnsureCreated();
+            dataContext?.Database.Migrate();
 
-    // Carga no banco de dados
-    //var sqlFile = "./Scripts/inserts.sql";
-    //var sql = File.ReadAllText(sqlFile);
-    //dataContext?.Database.ExecuteSqlRaw(sql);
+            // Carga no banco de dados
+            //var sqlFile = "./Scripts/inserts.sql";
+            //var sql = File.ReadAllText(sqlFile);
+            //dataContext?.Database.ExecuteSqlRaw(sql);
+        }
+    }
 }

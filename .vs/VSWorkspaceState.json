@@ -1,0 +1,12 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\backend",
+    "\\frontend",
+    "\\frontend\\api",
+    "\\frontend\\components",
+    "\\frontend\\pages"
+  ],
+  "SelectedNode": "\\frontend\\components\\UserForm.jsx",
+  "PreviewInSolutionExplorer": false
+}
