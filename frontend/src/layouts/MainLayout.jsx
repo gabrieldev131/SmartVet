@@ -4,7 +4,7 @@ import Navbar from '../components/Navbar';
 
 const LayoutContainer = styled.div`
   display: flex;
-  background-color: #f0f4f8; /* Fundo cinza claro como no login */
+  background-color: white; /* Fundo cinza claro como no login */
 `;
 
 const Content = styled.main`

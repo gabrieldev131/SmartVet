@@ -15,6 +15,7 @@ export const AnimalListDiv = styled.div`
   padding: 16px;
   background: #fdfdfd;
   display: flex;
+  width: 100%;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -157,47 +158,7 @@ export const FilterInput = styled.input`
   margin-right: 4px
 `;
 
-export const FilterButton = styled.button`
-  padding: 15px 30px;
-  border-radius: 8px;
-  border: none;
-  font-weight: 600;
-  font-size: 1.05rem;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-
-
-  &.edit {
-    background-color: ${colors.primaryBlue};
-    color: white;
-    &:hover {
-      background-color: #2980b9;
-      transform: translateY(-2px);
-      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-    }
-    &:active {
-      transform: translateY(0);
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    }
-  }
-
-  &.delete {
-    background-color: ${colors.secondaryOrange};
-    color: white;
-    &:hover {
-      background-color: #d35400;
-      transform: translateY(-2px);
-      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-    }
-    &:active {
-      transform: translateY(0);
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    }
-  }
-`;
-
-export const  NewAnimalButton = styled.button`
+export const Button = styled.button`
   padding: 15px 30px;
   border-radius: 8px;
   border: none;
@@ -244,9 +205,9 @@ export const  NewAnimalButton = styled.button`
   }
 `;
 
+
 export const SearchContainer = styled.div`
   position: relative;
-  margin-bottom: 40px;
   width: 80%;
 `;
 

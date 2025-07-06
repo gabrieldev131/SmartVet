@@ -1,13 +1,13 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { Animal, AnimalCreate, AnimalGetAll } from '../../services/AnimalService';
 import { AnimalCard } from './AnimalCard';
-import { Card, CardButton, FilterInput, FilterButton, FilterDiv, NewAnimalButton, AnimalListDiv, AnimalCardDiv, SearchContainer, SearchIcon, SearchInput } from './AnimalStyle';
+import { Card, CardButton, FilterInput, Button, FilterDiv, AnimalListDiv, AnimalCardDiv, SearchContainer, SearchIcon, SearchInput } from './AnimalStyle';
 import AnimalCreateForm from './AnimalCreateCard'
 import Modal from '../Modal';
 
 function AnimalList() {
   const [animals, setAnimals] = useState([]);     // aqui o estado que o React observa
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [creating, setCreating] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
   const [filter, setFilterSection] = useState(false)
@@ -124,9 +124,9 @@ function AnimalList() {
   }
 
   return (
-    <AnimalListDiv>
+    <AnimalListDiv style={{backgroundColor:'#f0f2f5', borderRadius:'15px', }}>
       {!filter && (
-        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%' }}>
+        <div style={{ display: 'flex', gap:'10px', flexDirection: 'row', alignItems: 'center', width: '90%', marginBottom: '40px'}}>
           <SearchContainer>
             <SearchInput
               type="text"
@@ -137,9 +137,12 @@ function AnimalList() {
             />
             <SearchIcon>🔍</SearchIcon>
           </SearchContainer>
-          <FilterButton className="edit" onClick={handleFilterButton}>
-            {filter ? 'Fechar Filtros' : 'Abrir Filtros'}
-          </FilterButton>
+          <Button className="edit" onClick={handleFilterButton}>
+            {filter ? 'Fechar Filtros' : 'Listar Filtros'}
+          </Button>
+          <Button className="new-animal" onClick={() => setCreating(true)}>
+            Novo Animal
+          </Button>
         </div>
       )}
       {filter && (
@@ -187,20 +190,18 @@ function AnimalList() {
               className="input"
             />
 
-            <FilterButton className="delete" onClick={handleClearFilters}>
+            <Button className="delete" onClick={handleClearFilters}>
               Limpar filtros
-            </FilterButton>
+            </Button>
           </FilterDiv>
 
-          <FilterButton className="edit" onClick={handleFilterButton}>
+          <Button className="edit" onClick={handleFilterButton}>
             {filter ? 'Fechar Filtros' : 'Abrir Filtros'}
-          </FilterButton>
+          </Button>
         </div>
       )}
 
-      <NewAnimalButton className="new-animal" onClick={() => setCreating(true)}>
-        Novo Animal
-      </NewAnimalButton>
+      
 
       {creating && (
         <Modal isOpen={creating} onClose={() => setCreating(false)}>
