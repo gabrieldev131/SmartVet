@@ -12,15 +12,15 @@ function App() {
     <Router>
       <Routes>
         {/* Rota de Login não tem a Navbar */}
-        <Route path="/login" element={<LoginPage />} />
+        <Route path="/" element={<LoginPage />} />
 
         {/* Rotas dentro do MainLayout (com a Navbar) */}
-        <Route path="/" element={
+        <Route path="/home" element={
           <MainLayout>
             <HomePage />
           </MainLayout>
         } />
-        <Route path="/clientes-e-animais" element={
+        <Route path="/animais" element={
           <MainLayout>
             <ClientesAnimaisPage />
           </MainLayout>
@@ -32,7 +32,7 @@ function App() {
         } />
 
         {/* Redireciona qualquer outra rota para a página inicial */}
-        <Route path="*" element={<Navigate to="/" />} />
+        <Route path="*" element={<Navigate to="/home" />} />
       </Routes>
     </Router>
   );
