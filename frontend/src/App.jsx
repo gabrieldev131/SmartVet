@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import MainLayout from './layouts/MainLayout';
 import LoginPage from './pages/LoginPage';
-import ClientesAnimaisPage from './pages/AnimaisPage';
+import AnimaisPage from './pages/AnimaisPage';
 import HomePage from './pages/InicioPage';
 import FilaPage from './pages/FilaPage';
 
@@ -22,7 +22,7 @@ function App() {
         } />
         <Route path="/animais" element={
           <MainLayout>
-            <ClientesAnimaisPage />
+            <AnimaisPage />
           </MainLayout>
         } />
         <Route path="/fila-atendimento" element={

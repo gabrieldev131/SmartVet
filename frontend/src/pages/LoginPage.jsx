@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+// 1. Importe o useNavigate do react-router-dom
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 // Certifique-se que o caminho para sua imagem está correto!
 import SmartVetGato from '../imgs/gato.png';
@@ -154,12 +156,20 @@ const GraphicImage = styled.img`
 function LoginPage() {
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
+  // 2. Inicialize o hook useNavigate
+  const navigate = useNavigate();
 
   const handleLogin = (e) => {
     e.preventDefault();
-    // Futuramente, a lógica de login com a API virá aqui
-    alert(`Login tentado com:\nEmail: ${email}\nSenha: ${senha}`);
-    // Exemplo: navigate('/dashboard'); // Usaria o useNavigate do react-router-dom
+
+    // 3. Adicione a lógica de autenticação
+    if (email === 'admin@email.com' && senha === '12345') {
+      // Se as credenciais estiverem corretas, redirecione para a página home
+      navigate('/home');
+    } else {
+      // Caso contrário, exiba uma mensagem de erro
+      alert('Email ou senha incorretos.');
+    }
   };
 
   return (
@@ -168,16 +178,16 @@ function LoginPage() {
         <FormPanel>
           <Title>Bem Vindo!</Title>
           <form onSubmit={handleLogin}>
-            <Input 
-              type="email" 
+            <Input
+              type="email"
               placeholder="Email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required /* Torna o campo obrigatório */
             />
-            <Input 
-              type="password" 
-              placeholder="Senha" 
+            <Input
+              type="password"
+              placeholder="Senha"
               value={senha}
               onChange={(e) => setSenha(e.target.value)}
               required /* Torna o campo obrigatório */
@@ -185,12 +195,13 @@ function LoginPage() {
             <OptionsWrapper>
               <StyledLink href="#">Esqueceu a senha?</StyledLink>
             </OptionsWrapper>
-            <LoginButton to="/" active={location.pathname === '/'} >Login</LoginButton>
+            {/* O atributo "to" foi removido e o tipo mudou para "submit",
+                pois o controle de navegação agora é feito pela função handleLogin */}
+            <LoginButton type="submit">Login</LoginButton>
           </form>
         </FormPanel>
-        
+
         <GraphicPanel>
-          {/* CORREÇÃO AQUI: Use a imagem como 'src' de uma tag <img> */}
           <GraphicImage src={SmartVetGato} alt="SmartPet Login Graphic" />
         </GraphicPanel>
 
