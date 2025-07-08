@@ -1,34 +1,10 @@
-import  { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import {AtendimentoButton} from './AtendimentoStyle';
-import { AtendimentoGetAll } from '../../services/AtendimentoService'; 
-// Mock de dados de clientes e animais para simular a seleção
-// Em um sistema real, você buscaria isso do backend ou de um estado global
-const mockClientsWithAnimals = [
-  {
-    id: 1,
-    nome: 'Robson Ferreira',
-    animais: [
-      { id: 101, nome: 'Rex (Cachorro)', especie: 'Canina' },
-      { id: 102, nome: 'Miau (Gato)', especie: 'Felina' },
-    ],
-  },
-  {
-    id: 2,
-    nome: 'Maria Souza',
-    animais: [
-      { id: 103, nome: 'Bolinha (Coelho)', especie: 'Lagomorfa' },
-    ],
-  },
-  {
-    id: 3,
-    nome: 'Pedro Alvares',
-    animais: [
-      { id: 104, nome: 'Mel (Pássaro)', especie: 'Ave' },
-      { id: 105, nome: 'Thor (Cachorro)', especie: 'Canina' },
-    ],
-  },
-];
+import { AtendimentoButton } from './AtendimentoStyle';
+import { Appointment, AtendimentoCreate, AtendimentoGetAll } from '../../services/AtendimentoService';
+import Modal from '../Modal';
+import AtendimentoForm from './AtendimentoForm';
+import { AnimalGetAll } from '../../services/AnimalService';
 
 // Paleta de cores (para consistência com as outras páginas)
 const colors = {
@@ -152,44 +128,60 @@ const EmptyQueueMessage = styled.p`
 
 
 export function AtendimentoList() {
-  const [selectedAnimalId, setSelectedAnimalId] = useState('');
-  // Estado da fila: armazena objetos com { animal, client }
-  const [queue, setQueue] = useState([]);
-
-  // Função para pegar o animal e cliente selecionados no dropdown
-  const getSelectedAnimalAndClient = () => {
-    if (!selectedAnimalId) return null;
-
-    for (const client of mockClientsWithAnimals) {
-      const animal = client.animais.find(a => a.id === parseInt(selectedAnimalId));
-      if (animal) {
-        return { animal, client };
-      }
-    }
-    return null;
-  };
 
   const [atendimentos, setAtendimentos] = useState([]);
+  const [animals, setAnimals] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [creating, setCreating] = useState(false);
+
   useEffect(() => {
-      const fetchAtendimentos = async () => {
-        try {
-          const data = await AtendimentoGetAll();
-          setAtendimentos(data);                         // atualiza o estado
-        } catch (error) {
-          console.error('Erro ao buscar atendimentos:', error);
-        } finally {
-          setLoading(false);
-        }
-      };
-  
-      fetchAtendimentos();
-    }, []);
+    const fetchAtendimentos = async () => {
+      try {
+        const data = await AtendimentoGetAll();
+        setAtendimentos(data);                         // atualiza o estado
+      } catch (error) {
+        console.error('Erro ao buscar atendimentos:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchAtendimentos();
+  }, []);
+
+  useEffect(() => {
+    const fetchAnimals = async () => {
+      try {
+        const data = await AnimalGetAll();
+        setAnimals(data);                         // atualiza o estado
+      } catch (error) {
+        console.error('Erro ao buscar animais:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchAnimals();
+  }, []);
 
 
-  const handleNovoAtendimento = () => {
+  const handleNovoAtendimento = async (formData) => {
+    try {
+      const appointment = new Appointment({
+        scheduled_date: formData.scheduled_date,
+        urgency: parseInt(formData.urgency), // só para garantir que é número
+        result_description: formData.result_description,
+        animalId: formData.animalId
+      });
 
-  }
+      await AtendimentoCreate(appointment); // chama o serviço com os campos corretos
+      const data = await AtendimentoGetAll();
+      setAtendimentos(data);
+      setCreating(false);
+    } catch (err) {
+      console.error('Erro ao criar atendimento', err);
+    }
+  };
 
   const handleAddToQueue = () => {
     const selected = getSelectedAnimalAndClient();
@@ -210,41 +202,58 @@ export function AtendimentoList() {
   };
 
   return (
+
     <QueueListContainer>
+      <Modal isOpen={creating} onClose={() => setCreating(false)}>
+        <AtendimentoForm
+          animals={animals}
+          onSave={handleNovoAtendimento}
+          onCancel={() => setCreating(false)}
+        />
+      </Modal>
       <QueueListHeader>
-        <QueueListTitle>Animais na Fila ({queue.length})</QueueListTitle>
-        <AtendimentoButton className='new-atendimento' onClick={handleNovoAtendimento}> Novo Atendimento </AtendimentoButton>
-        </QueueListHeader>
-        
-        {queue.length === 0 ? (
-          <EmptyQueueMessage>
-            A fila de atendimento está vazia no momento. Adicione um atendimento!
-          </EmptyQueueMessage>
-        ) : (
-          queue.map(item => (
-            <QueueItem key={item.animal.id}>
-              <AnimalInfo>
-                <AnimalName>{item.animal.nome}</AnimalName>
-                <ClientName>Cliente: {item.client.nome}</ClientName>
-              </AnimalInfo>
-              <QueueActions>
-                <ActionButton 
-                  className="attended" 
-                  onClick={() => handleRemoveFromQueue(item.animal.id)}
-                >
-                  Atendido
-                </ActionButton>
-                <ActionButton 
-                  className="gave-up" 
-                  onClick={() => handleRemoveFromQueue(item.animal.id)}
-                >
-                  Desistiu
-                </ActionButton>
-              </QueueActions>
-            </QueueItem>
-          ))
-        )}
-      </QueueListContainer>
+        <QueueListTitle>Animais na Fila ({atendimentos.length})</QueueListTitle>
+        <AtendimentoButton className='new-atendimento' onClick={() => setCreating(true)}>
+          Novo Atendimento
+        </AtendimentoButton>
+      </QueueListHeader>
+
+      {atendimentos.length === 0 ? (
+        <EmptyQueueMessage>
+          A fila de atendimento está vazia no momento. Adicione um atendimento!
+        </EmptyQueueMessage>
+      ) : (
+        [...atendimentos]
+          .sort((a, b) => {
+            if (a.urgency !== b.urgency) return b.urgency - a.urgency; // urgência decrescente
+            return new Date(a.scheduled_date) - new Date(b.scheduled_date); // data crescente
+          }).map(item => {
+            const animal = animals.find(a => a.id === item.animalId);
+            return (
+              <QueueItem key={item.id}>
+                <AnimalInfo>
+                  <AnimalName>{animal?.animal_name || 'Animal não encontrado'}</AnimalName>
+                  <ClientName>Cliente: {animal?.client?.nome || 'Cliente não encontrado'}</ClientName>
+                </AnimalInfo>
+                <QueueActions>
+                  <ActionButton
+                    className="attended"
+                    onClick={() => handleRemoveFromQueue(animal?.id)}
+                  >
+                    Atendido
+                  </ActionButton>
+                  <ActionButton
+                    className="gave-up"
+                    onClick={() => handleRemoveFromQueue(animal?.id)}
+                  >
+                    Desistiu
+                  </ActionButton>
+                </QueueActions>
+              </QueueItem>
+            );
+          })
+      )}
+    </QueueListContainer>
   );
 }
 

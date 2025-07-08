@@ -7,7 +7,7 @@ import Modal from '../Modal';
 
 function AnimalList() {
   const [animals, setAnimals] = useState([]);     // aqui o estado que o React observa
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [creating, setCreating] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
   const [filter, setFilterSection] = useState(false)

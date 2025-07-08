@@ -98,12 +98,12 @@ export async function AtendimentoGetById(id) {
     return await res
 }
 
-export async function AtendimentoCreate(animal) {
-    const res = await atendimentoService.create(animal)
+export async function AtendimentoCreate(atendimento) {
+    const res = await atendimentoService.create(atendimento)
 }
 
-export async function AtendimentoUpdate(id, animal) {
-    const res = await atendimentoService.update(id, animal)
+export async function AtendimentoUpdate(id, atendimento) {
+    const res = await atendimentoService.update(id, atendimento)
 }
 
 export async function AtendimentoDelete(id) {
