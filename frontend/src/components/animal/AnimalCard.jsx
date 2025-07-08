@@ -53,8 +53,8 @@ export function AnimalCard({ animal, onUpdate, onDelete }) {
       </AnimalInfo>
 
       <Actions>
-        <CardButton className="edit" onClick={() => setIsEditing(true)}>Editar Animal</CardButton>
-        <CardButton className="delete" onClick={handleDelete}>Excluir Animal</CardButton>
+        <CardButton className="edit" onClick={() => setIsEditing(true)}>Editar</CardButton>
+        <CardButton className="delete" onClick={handleDelete}>Excluir</CardButton>
       </Actions>
     </Card>
   );

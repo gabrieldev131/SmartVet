@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import Modal from '../components/Modal'; // Importe o Modal
-import NewClientForm from '../components/NovoAnimalForm'; // Importe o formulário
 import AnimalList from '../components/animal/AnimalList'; // importação do componente da lista de animais
 
 const colors = {

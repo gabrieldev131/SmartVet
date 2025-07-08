@@ -89,23 +89,23 @@ class StatusCode {
 
 // Essas são as funções efetivamente usadas
 export async function AtendimentoGetAll() {
-    const res = await animalService.getAll()
+    const res = await atendimentoService.getAll()
     return await res
 }
 
 export async function AtendimentoGetById(id) {
-    const res = await animalService.getById(id)
+    const res = await atendimentoService.getById(id)
     return await res
 }
 
 export async function AtendimentoCreate(animal) {
-    const res = await animalService.create(animal)
+    const res = await atendimentoService.create(animal)
 }
 
 export async function AtendimentoUpdate(id, animal) {
-    const res = await animalService.update(id, animal)
+    const res = await atendimentoService.update(id, animal)
 }
 
 export async function AtendimentoDelete(id) {
-    const res = await animalService.delete(id)
+    const res = await atendimentoService.delete(id)
 }
