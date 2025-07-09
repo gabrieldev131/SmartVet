@@ -183,23 +183,6 @@ export function AtendimentoList() {
     }
   };
 
-  const handleAddToQueue = () => {
-    const selected = getSelectedAnimalAndClient();
-    if (selected) {
-      // Verifica se o animal já está na fila para evitar duplicatas simples
-      const isAlreadyInQueue = queue.some(item => item.animal.id === selected.animal.id);
-      if (isAlreadyInQueue) {
-        alert('Este animal já está na fila!');
-        return;
-      }
-      setQueue(prevQueue => [...prevQueue, selected]);
-      setSelectedAnimalId(''); // Limpa a seleção após adicionar
-    }
-  };
-
-  const handleRemoveFromQueue = (animalId) => {
-    setQueue(prevQueue => prevQueue.filter(item => item.animal.id !== animalId));
-  };
 
   return (
 
@@ -219,40 +202,40 @@ export function AtendimentoList() {
       </QueueListHeader>
 
       {atendimentos.length === 0 ? (
-        <EmptyQueueMessage>
-          A fila de atendimento está vazia no momento. Adicione um atendimento!
-        </EmptyQueueMessage>
-      ) : (
-        [...atendimentos]
-          .sort((a, b) => {
-            if (a.urgency !== b.urgency) return b.urgency - a.urgency; // urgência decrescente
-            return new Date(a.scheduled_date) - new Date(b.scheduled_date); // data crescente
-          }).map(item => {
-            const animal = animals.find(a => a.id === item.animalId);
-            return (
-              <QueueItem key={item.id}>
-                <AnimalInfo>
-                  <AnimalName>{animal?.animal_name || 'Animal não encontrado'}</AnimalName>
-                  <ClientName>Cliente: {animal?.client?.nome || 'Cliente não encontrado'}</ClientName>
-                </AnimalInfo>
-                <QueueActions>
-                  <ActionButton
-                    className="attended"
-                    onClick={() => handleRemoveFromQueue(animal?.id)}
-                  >
-                    Atendido
-                  </ActionButton>
-                  <ActionButton
-                    className="gave-up"
-                    onClick={() => handleRemoveFromQueue(animal?.id)}
-                  >
-                    Desistiu
-                  </ActionButton>
-                </QueueActions>
-              </QueueItem>
-            );
-          })
-      )}
+  <EmptyQueueMessage>
+    A fila de atendimento está vazia no momento. Adicione um atendimento!
+  </EmptyQueueMessage>
+) : (
+  [...atendimentos]
+    .sort((a, b) => {
+      if (a.urgency !== b.urgency) return b.urgency - a.urgency;
+      return new Date(a.scheduled_date) - new Date(b.scheduled_date);
+    })
+    .map(atendimento => {
+      console.log('atendimento.animalId:', atendimento.animalId);
+      console.log('animals:', animals);
+
+      const animal = animals.find(a => a.id === atendimento.animalId);
+
+      return (
+        <QueueItem key={atendimento.id}>
+          <AnimalInfo>
+            <AnimalName>
+              {animal?.animal_name ?? 'Animal não encontrado'}
+            </AnimalName>
+          </AnimalInfo>
+          <QueueActions>
+            <ActionButton className="attended">
+              Atendido
+            </ActionButton>
+            <ActionButton className="gave-up">
+              Desistiu
+            </ActionButton>
+          </QueueActions>
+        </QueueItem>
+      );
+    })
+)}
     </QueueListContainer>
   );
 }

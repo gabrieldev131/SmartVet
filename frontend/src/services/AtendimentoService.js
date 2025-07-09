@@ -41,13 +41,13 @@ export const atendimentoService = {
 // OBS: id e payload devem ser no formato especificado no Swagger
 
 export class Appointment {
-    constructor({ id, scheduled_date, urgency, result_description, animalId }) {
-        this.id = id;
-        this.scheduledDate = new Date(scheduled_date);
-        this.urgency = urgency;
-        this.resultDescription = result_description;
-        this.animalId = animalId;
-    }
+    constructor({ id, scheduled_date, urgency, result_description, animalId, apointmentAnimalId }) {
+  this.id = id;
+  this.scheduledDate = new Date(scheduled_date);
+  this.urgency = urgency;
+  this.resultDescription = result_description;
+  this.animalId = animalId ?? apointmentAnimalId; 
+}
 
     get formattedDate() {
         return this.scheduledDate.toLocaleString('pt-BR');
