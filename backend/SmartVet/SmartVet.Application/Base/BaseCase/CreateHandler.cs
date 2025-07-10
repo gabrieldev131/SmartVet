@@ -1,10 +1,10 @@
 using AutoMapper;
-using ConectaFapes.Common.Application.DTO;
-using ConectaFapes.Common.Application.Interfaces.Services;
-using ConectaFapes.Common.Domain;
-using ConectaFapes.Common.Domain.BaseEntities;
-using ConectaFapes.Common.Infrastructure.Interfaces;
 using MediatR;
+using SmartVet.Domain.Base;
+using SmartVet.Infrastructure.Repositories.Common;
+using SmartVet.Application.Dto;
+using SmartVet.Application.Interfaces.BaseCrudInterface;
+
 
 namespace SmartVet.Application.Base.BaseCase
 {
@@ -31,6 +31,7 @@ namespace SmartVet.Application.Base.BaseCase
             var request = _mapper.Map<Request>(createRequest);
             var response = await _service.Create(request, cancellationToken);
             await _unitOfWork.Commit(cancellationToken);
+
             return response;
         }
     }

@@ -1,4 +1,3 @@
-using ConectaFapes.Common.Domain;
 using MediatR;
 using SmartVet.Application.Features.CRUD.AnimalEntity.DTOs;
 

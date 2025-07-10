@@ -1,10 +1,9 @@
 using AutoMapper;
-using ConectaFapes.Common.Application.DTO;
-using ConectaFapes.Common.Application.Interfaces.Services;
-using ConectaFapes.Common.Domain.BaseEntities;
-using ConectaFapes.Common.Domain;
 using MediatR;
-using ConectaFapes.Common.Infrastructure.Interfaces;
+using SmartVet.Domain.Base;
+using SmartVet.Application.Dto;
+using SmartVet.Application.Interfaces.BaseCrudInterface;
+using SmartVet.Infrastructure.Repositories.Common;
 
 namespace SmartVet.Application.Base.BaseCase
 {

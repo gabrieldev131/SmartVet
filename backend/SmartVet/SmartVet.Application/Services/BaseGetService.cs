@@ -3,10 +3,10 @@ using AutoMapper.QueryableExtensions;
 
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using ConectaFapes.Common.Application.DTO;
-using ConectaFapes.Common.Domain.BaseEntities;
-using ConectaFapes.Common.Infrastructure.Interfaces;
 using SmartVet.Application.Interfaces.BaseGetInterface;
+using SmartVet.Infrastructure.Repositories.Common;
+using SmartVet.Application.Dto;
+using SmartVet.Domain.Base;
 
 namespace SmartVet.Application.Services.BaseGetService
 {
@@ -27,13 +27,13 @@ namespace SmartVet.Application.Services.BaseGetService
         }
         public virtual ICollection<Response> GetAll()
         {
-            var result = _mapper.Map<ICollection<Response>>(_repository.GetAllAsNoTracking());
+            var result = _mapper.Map<ICollection<Response>>(_repository.GetAll());
             return result;
         }
 
         public virtual Response GetById(Guid id)
         {
-            var result = _mapper.Map<Response>(_repository.GetByIdAsNoTracking(id).FirstOrDefault());
+            var result = _mapper.Map<Response>(_repository.GetById(id).FirstOrDefault());
             return result;
         }
     }

@@ -1,4 +1,4 @@
-using ConectaFapes.Common.Infrastructure.Interfaces;
+using SmartVet.Infrastructure.Repositories.Common;
 using SmartVet.Infrastructure.Context;
 
 namespace SmartVet.Infrastructure.Repositories

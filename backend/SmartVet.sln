@@ -1,67 +1,46 @@
-
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34525.116
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SmartVet.Domain", "SmartVet\SmartVet.Domain\SmartVet.Domain.csproj", "{DOMAIN-GUID}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SmartVet.Domain", "SmartVet\SmartVet.Domain\SmartVet.Domain.csproj", "{71A25F39-DD94-4EB4-91A0-16C974255C74}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SmartVet.Application", "SmartVet\SmartVet.Application\SmartVet.Application.csproj", "{APP-GUID}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SmartVet.Application", "SmartVet\SmartVet.Application\SmartVet.Application.csproj", "{87B74058-FC31-4A2D-8D99-218A39D819B3}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SmartVet.Infrastructure", "SmartVet\SmartVet.Infrastructure\SmartVet.Infrastructure.csproj", "{INFRA-GUID}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SmartVet.Infrastructure", "SmartVet\SmartVet.Infrastructure\SmartVet.Infrastructure.csproj", "{017D9855-D97B-438C-ADE2-71E0137E24C1}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SmartVet.WebAPI", "SmartVet\SmartVet.WebAPI\SmartVet.WebAPI.csproj", "{WEB-GUID}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SmartVet.WebAPI", "SmartVet\SmartVet.WebAPI\SmartVet.WebAPI.csproj", "{29AD789D-C8FF-4E2F-AC12-11A16593524D}"
 EndProject
-Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{COMPOSE-GUID}"
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{FE9E6B8C-02C0-436E-89EC-C1CE7F175CAF}"
 EndProject
-// Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartVet.Domain.Test", "SmartVet\SmartVet.Domain.Test\SmartVet.Domain.Test.csproj", "{TEST-GUID}"
-// EndProject
-// Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SmartVet.Infrastructure.Test", "SmartVet\SmartVet.Infrastructure.Test\SmartVet.Infrastructure.Test.csproj", "{38820998-E6BD-479C-8BAE-36871A33F323}"
-// EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{DOMAIN-GUID}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{DOMAIN-GUID}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{DOMAIN-GUID}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{DOMAIN-GUID}.Release|Any CPU.Build.0 = Release|Any CPU
-		{APP-GUID}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{APP-GUID}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{APP-GUID}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{APP-GUID}.Release|Any CPU.Build.0 = Release|Any CPU
-		{INFRA-GUID}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{INFRA-GUID}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{INFRA-GUID}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{INFRA-GUID}.Release|Any CPU.Build.0 = Release|Any CPU
-		{WEB-GUID}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{WEB-GUID}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{WEB-GUID}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{WEB-GUID}.Release|Any CPU.Build.0 = Release|Any CPU
-		{7964FDCD-F692-4B1B-9FB7-C8281A41717D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7964FDCD-F692-4B1B-9FB7-C8281A41717D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7964FDCD-F692-4B1B-9FB7-C8281A41717D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7964FDCD-F692-4B1B-9FB7-C8281A41717D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{TEST-GUID}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{TEST-GUID}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{TEST-GUID}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{TEST-GUID}.Release|Any CPU.Build.0 = Release|Any CPU
-		{38820998-E6BD-479C-8BAE-36871A33F323}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{38820998-E6BD-479C-8BAE-36871A33F323}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{38820998-E6BD-479C-8BAE-36871A33F323}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{38820998-E6BD-479C-8BAE-36871A33F323}.Release|Any CPU.Build.0 = Release|Any CPU
+		{71A25F39-DD94-4EB4-91A0-16C974255C74}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{71A25F39-DD94-4EB4-91A0-16C974255C74}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{71A25F39-DD94-4EB4-91A0-16C974255C74}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{71A25F39-DD94-4EB4-91A0-16C974255C74}.Release|Any CPU.Build.0 = Release|Any CPU
+		{87B74058-FC31-4A2D-8D99-218A39D819B3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{87B74058-FC31-4A2D-8D99-218A39D819B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{87B74058-FC31-4A2D-8D99-218A39D819B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{87B74058-FC31-4A2D-8D99-218A39D819B3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{017D9855-D97B-438C-ADE2-71E0137E24C1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{017D9855-D97B-438C-ADE2-71E0137E24C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{017D9855-D97B-438C-ADE2-71E0137E24C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{017D9855-D97B-438C-ADE2-71E0137E24C1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{29AD789D-C8FF-4E2F-AC12-11A16593524D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{29AD789D-C8FF-4E2F-AC12-11A16593524D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{29AD789D-C8FF-4E2F-AC12-11A16593524D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{29AD789D-C8FF-4E2F-AC12-11A16593524D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FE9E6B8C-02C0-436E-89EC-C1CE7F175CAF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FE9E6B8C-02C0-436E-89EC-C1CE7F175CAF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FE9E6B8C-02C0-436E-89EC-C1CE7F175CAF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FE9E6B8C-02C0-436E-89EC-C1CE7F175CAF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{DOMAIN-GUID} = {B024BF5F-C15B-4445-8ADE-D1D9F21FB574}
-		{APP-GUID} = {B024BF5F-C15B-4445-8ADE-D1D9F21FB574}
-		{INFRA-GUID} = {10EB714F-63BC-4DF0-81AD-0216171485C4}
-		{WEB-GUID} = {3D77C2E3-8755-49BB-941B-B21BDE25353C}
-		{TEST-GUID} = {2BC11362-6CBD-4D52-A2D9-B5AEF5A8463C}
-		{38820998-E6BD-479C-8BAE-36871A33F323} = {A7563191-8193-43B7-A771-525297E3D95C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {69766354-AE61-479C-B6D7-C8FFA3931E1F}

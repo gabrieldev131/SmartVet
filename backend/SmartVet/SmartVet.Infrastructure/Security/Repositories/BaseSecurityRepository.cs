@@ -1,4 +1,4 @@
-using SmartVet.Domain.Interfaces.Security;
+using SmartVet.Infrastructure.Interfaces.Security;
 using SmartVet.Domain.Security.Shared.Entities;
 using SmartVet.Infrastructure.Context;
 

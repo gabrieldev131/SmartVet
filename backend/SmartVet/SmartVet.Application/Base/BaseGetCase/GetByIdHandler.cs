@@ -1,9 +1,8 @@
 using AutoMapper;
-using ConectaFapes.Common.Application.DTO;
-using ConectaFapes.Common.Domain;
-using ConectaFapes.Common.Domain.BaseEntities;
 using MediatR;
 using SmartVet.Application.Interfaces.BaseGetInterface;
+using SmartVet.Domain.Base;
+using SmartVet.Application.Dto;
 
 namespace SmartVet.Application.Base.BaseGetCase
 {

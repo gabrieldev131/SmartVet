@@ -1,5 +1,5 @@
 using SmartVet.Domain.Entities;
-using ConectaFapes.Common.Application.Interfaces.Services;
+using SmartVet.Application.Interfaces.BaseCrudInterface;
 using SmartVet.Application.Features.CRUD.AnimalEntity.DTOs;
 
 namespace SmartVet.Application.Features.CRUD.AnimalEntity.Interface

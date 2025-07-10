@@ -1,12 +1,12 @@
 using Microsoft.AspNetCore.OData;
 using Microsoft.OData.Edm;
 using Microsoft.OData.ModelBuilder;
-using SmartVet.Application.Features.CRUD.AdminEntity.DTOs;
-using SmartVet.Application.Features.CRUD.RecepcionistEntity.DTOs;
-using SmartVet.Application.Features.CRUD.VeterinarianEntity.DTOs;
-using SmartVet.Application.Features.CRUD.ClientEntity.DTOs;
+//using SmartVet.Application.Features.CRUD.AdminEntity.DTOs;
+//using SmartVet.Application.Features.CRUD.RecepcionistEntity.DTOs;
+//using SmartVet.Application.Features.CRUD.VeterinarianEntity.DTOs;
+//using SmartVet.Application.Features.CRUD.ClientEntity.DTOs;
 using SmartVet.Application.Features.CRUD.AnimalEntity.DTOs;
-using SmartVet.Application.Features.CRUD.ServiceEntity.DTOs;
+//using SmartVet.Application.Features.CRUD.ServiceEntity.DTOs;
 using SmartVet.Application.Features.CRUD.ApointmentEntity.DTOs;
 
 
@@ -17,12 +17,12 @@ namespace SmartVet.WebApi.Extensions
         private static IEdmModel GetEdmModel()
         {
             ODataConventionModelBuilder builder = new();
-            builder.EntitySet<AdminResponseDTO>("admin");
-            builder.EntitySet<RecepcionistResponseDTO>("recepcionist");
-            builder.EntitySet<VeterinarianResponseDTO>("veterinarian");
-            builder.EntitySet<ClientResponseDTO>("client");
+            //builder.EntitySet<AdminResponseDTO>("admin");
+            //builder.EntitySet<RecepcionistResponseDTO>("recepcionist");
+            //builder.EntitySet<VeterinarianResponseDTO>("veterinarian");
+            //builder.EntitySet<ClientResponseDTO>("client");
             builder.EntitySet<AnimalResponseDTO>("animal");
-            builder.EntitySet<ServiceResponseDTO>("service");
+            //builder.EntitySet<ServiceResponseDTO>("service");
             builder.EntitySet<ApointmentResponseDTO>("apointment");
 
             return builder.GetEdmModel();

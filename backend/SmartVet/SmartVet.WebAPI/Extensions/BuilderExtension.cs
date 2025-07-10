@@ -7,49 +7,46 @@ namespace SmartVet.WebApi.Extensions
 {
     public static class BuilderExtension
     {
-        // Recuperação das Private Keys definidas no appsettings.json
-        public async static void AddConfiguration(this WebApplicationBuilder builder)
+        public static void AddConfiguration(this WebApplicationBuilder builder)
         {
-            bool prod = false;
+            // Define os valores diretamente no código
+            Configuration.Secrets.ApiKey = "MinhaApiKey123";
+            Configuration.Secrets.JwtPrivateKey = "MinhaChaveJwtSuperSecreta@123"; 
+            Configuration.Secrets.PasswordSaltKey = "MeuSaltSeguro@456";
 
-            if (prod)
-            {
-                Configuration.Secrets.ApiKey = Environment.GetEnvironmentVariable("ApiKey");
-                Configuration.Secrets.JwtPrivateKey = Environment.GetEnvironmentVariable("JwtPrivateKey");
-                Configuration.Secrets.PasswordSaltKey = Environment.GetEnvironmentVariable("PasswordSaltKey");
-
-                Configuration.Email.DefaultFromEmail = Environment.GetEnvironmentVariable("DefaultFromEmail");
-                Configuration.Email.ApiKey = Environment.GetEnvironmentVariable("EmailApiKey");
-            }
-            else
-            {
-                Configuration.Secrets.ApiKey = Environment.GetEnvironmentVariable("ApiKey");
-                Configuration.Secrets.JwtPrivateKey = Environment.GetEnvironmentVariable("JwtPrivateKey");
-                Configuration.Secrets.PasswordSaltKey = Environment.GetEnvironmentVariable("PasswordSaltKey");
-
-                Configuration.Email.DefaultFromEmail = Environment.GetEnvironmentVariable("DefaultFromEmail");
-                Configuration.Email.ApiKey = Environment.GetEnvironmentVariable("EmailApiKey");
-            }
+            Configuration.Email.DefaultFromEmail = "contato@smartvet.com";
+            Configuration.Email.ApiKey = "ChaveDoServicoDeEmail";
         }
-        // Configuraçãod do JWT na api
+
         public static void AddJwtAuthentication(this WebApplicationBuilder builder)
         {
+            var jwtKey = Configuration.Secrets.JwtPrivateKey;
+
+            if (string.IsNullOrWhiteSpace(jwtKey))
+                throw new Exception("JwtPrivateKey não definida.");
+
+            var key = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(jwtKey));
+
             builder.Services
-                .AddAuthentication(x =>
+                .AddAuthentication(options =>
                 {
-                    x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                    x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-                }).AddJwtBearer(x =>
+                    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                })
+                .AddJwtBearer(options =>
                 {
-                    x.RequireHttpsMetadata = false;
-                    x.SaveToken = true;
-                    x.TokenValidationParameters = new TokenValidationParameters
+                    options.RequireHttpsMetadata = false;
+                    options.SaveToken = true;
+                    options.TokenValidationParameters = new TokenValidationParameters
                     {
-                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(Configuration.Secrets.JwtPrivateKey)),
+                        ValidateIssuerSigningKey = true,
+                        IssuerSigningKey = key,
                         ValidateIssuer = false,
-                        ValidateAudience = false
+                        ValidateAudience = false,
+                        ClockSkew = TimeSpan.Zero
                     };
                 });
+
             builder.Services.AddAuthorization();
         }
     }

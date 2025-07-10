@@ -1,5 +1,5 @@
 using MediatR;
-using ConectaFapes.Common.Domain;
+using SmartVet.Domain.Base;
 
 namespace SmartVet.Application.Features.CRUD.AnimalEntity.DTOs
 {
@@ -11,8 +11,6 @@ namespace SmartVet.Application.Features.CRUD.AnimalEntity.DTOs
         public string Breed { get; set; }
         public decimal Weight { get; set; }
         public int Birth_year { get; set; }
-
-        public Guid AnimalClientId { get; set; }
 
 
     }

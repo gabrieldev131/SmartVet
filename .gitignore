@@ -1,3 +1,4 @@
+
 # Arquivo .gitignore para um projeto React + Vite
 
 # Ignorar dependências
@@ -56,3 +57,9 @@ Thumbs.db
 # Arquivos de build do TypeScript
 # Se você estiver usando TypeScript, o compilador pode gerar este arquivo.
 .tsbuildinfo
+.env
+.venv
+venv
+backend/SmartVet/SmartVet.*/obj
+backend/obj
+backend/.vs

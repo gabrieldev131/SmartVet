@@ -10,10 +10,7 @@ namespace SmartVet.Infrastructure.EntitiesConfiguration
         {
             builder.HasKey(x => x.Id);
 
-            builder
-                .HasMany<Apointment>(animal => animal.Apointments)
-                .WithOne(apointment => apointment.Animal)
-                .HasForeignKey(animal => animal.ApointmentAnimalId);
+
 
 
         }
