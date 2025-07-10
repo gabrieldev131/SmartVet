@@ -2,11 +2,17 @@
   "ExpandedNodes": [
     "",
     "\\backend",
-    "\\frontend",
-    "\\frontend\\api",
-    "\\frontend\\components",
-    "\\frontend\\pages"
+    "\\backend\\SmartVet",
+    "\\backend\\SmartVet\\SmartVet.Infrastructure",
+    "\\backend\\SmartVet\\SmartVet.Infrastructure\\Security",
+    "\\backend\\SmartVet\\SmartVet.Infrastructure\\Security\\Repositories",
+    "\\backend\\SmartVet\\SmartVet.WebAPI",
+    "\\backend\\SmartVet\\SmartVet.WebAPI\\Controllers",
+    "\\backend\\SmartVet\\SmartVet.WebAPI\\Controllers\\BaseControllers",
+    "\\backend\\SmartVet\\SmartVet.WebAPI\\Controllers\\Entities",
+    "\\backend\\SmartVet\\SmartVet.WebAPI\\Controllers\\UseCases",
+    "\\backend\\SmartVet\\SmartVet.WebAPI\\Extensions"
   ],
-  "SelectedNode": "\\frontend\\components\\UserForm.jsx",
+  "SelectedNode": "\\backend\\SmartVet\\SmartVet.WebAPI\\Extensions\\BuilderExtension.cs",
   "PreviewInSolutionExplorer": false
 }

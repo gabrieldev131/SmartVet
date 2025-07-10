@@ -1,3 +1,4 @@
+using SmartVet.Application;
 using SmartVet.Application.Services;
 using SmartVet.Infrastructure;
 using SmartVet.Infrastructure.Context;
@@ -17,6 +18,7 @@ internal class Program
         //builder.AddServiceDefaults();
         // Add services to the container.
         builder.Services.ConfigurePersistenceApp(builder.Configuration);
+        builder.Services.ConfigureApplicationServices();
         builder.Services.ConfigureApplicationApp();
 
         builder.Services.ConfigureCorsPolicy();

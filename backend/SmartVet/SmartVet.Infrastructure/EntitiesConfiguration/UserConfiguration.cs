@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using SmartVet.Domain.Security.Account.Entities;
+using SmartVet.Infrastructure.Converters;
 
 namespace SmartVet.Infrastructure.EntitiesConfiguration
 {
@@ -8,37 +9,23 @@ namespace SmartVet.Infrastructure.EntitiesConfiguration
     {
         public void Configure(EntityTypeBuilder<User> builder)
         {
-            builder.HasKey(x => x.Id);
 
-            builder.OwnsOne(x => x.Email, email =>
-            {
-                email.OwnsOne(e => e.Verification);
-            });
-            builder.OwnsOne(x => x.Password);
+             builder.Property(u => u.UserName)
+                    .HasMaxLength(256)
+                    .IsRequired(false); // Ou IsRequired(), dependendo da sua regra de negócio
+
+            // Para o seu Value Object 'EmailVO' (se você o renomeou para evitar conflito com IdentityUser.Email):
+            builder.Property(u => u.UserEmailVO) // Use o nome da sua propriedade do Value Object (ex: EmailVO)
+                   .HasConversion<EmailValueConverter>() // Use seu ValueConverter
+                   .HasColumnName("CustomEmail") // Dê um nome de coluna único para evitar conflitos
+                   .IsRequired(); // Defina como obrigatório ou não
+
+            // Para 'RefreshToken'
+            builder.Property(u => u.RefreshToken)
+                   .IsRequired(false); // Se for opcional (nullable)
+
 
 
         }
     }
 }
-
-//builder.OwnsOne(x => x.Email, email =>
-//{
-//    email.Property(e => e.Address)
-//        .HasColumnName("Email")
-//        .IsRequired();
-
-//    email.OwnsOne(e => e.Verification, verification =>
-//    {
-//        verification.Property(v => v.Code)
-//            .HasColumnName("EmailVerificationCode")
-//            .IsRequired();
-
-//        verification.Property(v => v.ExpiresAt)
-//            .HasColumnName("EmailVerificationExpiresAt");
-
-//        verification.Property(v => v.VerifiedAt)
-//            .HasColumnName("EmailVerificationVerifiedAt");
-
-//        verification.Ignore(v => v.IsActive); // Computado, não precisa no banco
-//    });
-//});

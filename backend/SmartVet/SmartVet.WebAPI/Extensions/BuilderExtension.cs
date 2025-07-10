@@ -1,4 +1,7 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.IdentityModel.Tokens;
 using SmartVet.Domain.Security.Account;
 using System.Text;
@@ -27,6 +30,22 @@ namespace SmartVet.WebApi.Extensions
 
             var key = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(jwtKey));
 
+            builder.Services.AddCors();
+
+            builder.Services.AddMvc(config =>
+            {
+                var policy = new AuthorizationPolicyBuilder()
+                                .RequireAuthenticatedUser()
+                                .Build();
+                config.Filters.Add(new AuthorizeFilter(policy));
+            });
+
+            builder.Services.AddAuthorization(options =>
+            {
+                options.AddPolicy("user", policy => policy.RequireClaim("Store", "user"));
+                options.AddPolicy("admin", policy => policy.RequireClaim("Store", "admin"));
+            });
+
             builder.Services
                 .AddAuthentication(options =>
                 {
@@ -47,7 +66,7 @@ namespace SmartVet.WebApi.Extensions
                     };
                 });
 
-            builder.Services.AddAuthorization();
+            //builder.Services.AddAuthorization();
         }
     }
 }

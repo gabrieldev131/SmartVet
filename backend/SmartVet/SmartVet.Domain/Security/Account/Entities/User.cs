@@ -1,47 +1,31 @@
 using SmartVet.Domain.Security.Account.ValueObjects;
-using SmartVet.Domain.Security.Shared.Entities;
+using Microsoft.AspNetCore.Identity;
 
 namespace SmartVet.Domain.Security.Account.Entities
 {
-    public class User : Entity
+    // SUA CLASSE USER DEVE HERDAR DE IDENTITYUSER<GUID>
+    public class User : IdentityUser<Guid> 
     {
-        public string Name { get; private set; } = string.Empty;
-        public Email Email { get; private set; } = null!;
-        public Password Password { get; private set; } = null!;
-        public List<Role> Roles { get; set; } = [];
+        
+        public Email UserEmailVO { get; private set; } = null!; 
+
         public Guid? RefreshToken { get; set; }
 
-        protected User() { }
+        // O construtor padrão é necessário para o EF Core e Identity.
+        public User() { }
 
-        public User(string name, Email email, Password password, Guid? refreshToken)
+        public User(string userName, Email emailVo)
         {
-            Name = name;
-            Email = email;
-            Password = password;
-            RefreshToken = refreshToken;
-            Roles = new List<Role>();
+            // IdentityUser já cuida do Id.
+            this.UserName = userName; // Use para o nome de usuário/login
+            this.Email = emailVo.Address; // Atribua a string do seu VO à propriedade Email do IdentityUser
+            this.UserEmailVO = emailVo;   // Mantenha seu VO se necessário para validações ou lógica de domínio
         }
 
-        public User(string name, Email email, Password password)
+        public void UpdateEmail(Email emailVo)
         {
-            Name = name;
-            Email = email;
-            Password = password;
-            Roles = new List<Role>();
-        }
-
-        public void UpdatePassword(string plainTextPassword, string code)
-        {
-            if (!string.Equals(code.Trim(), Password.ResetCode.Trim(), StringComparison.CurrentCultureIgnoreCase))
-                throw new Exception("Código de restauração inválido");
-
-            var password = new Password(plainTextPassword);
-            Password = password;
-        }
-
-        public void UpdateEmail(Email email)
-        {
-            Email = email;
+            this.Email = emailVo.Address; // Atualiza a propriedade Email do IdentityUser
+            this.UserEmailVO = emailVo; // Atualiza seu Value Object
         }
 
         public void UpdateRefreshToken(Guid? token)
@@ -49,9 +33,5 @@ namespace SmartVet.Domain.Security.Account.Entities
             RefreshToken = token;
         }
 
-        public void addRole(Role role)
-        {
-            Roles.Add(role);
-        }
     }
 }

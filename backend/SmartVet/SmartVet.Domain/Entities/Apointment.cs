@@ -15,7 +15,7 @@ namespace SmartVet.Domain.Entities
       public Animal? Animal { get; set; }
       public Guid ApointmentAnimalId {get; set; }
 
-        public Apointment() { }
+        //public Apointment() { }
         public Apointment(DateTime scheduled_date,int urgency,string result_description, Guid apointmentAnimalId)
         {
 

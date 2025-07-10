@@ -10,6 +10,8 @@
                     .AllowAnyOrigin()
                     .AllowAnyMethod()
                     .AllowAnyHeader());
+
+                
             });
         }
     }
