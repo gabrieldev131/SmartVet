@@ -136,34 +136,21 @@ export function AtendimentoList() {
 
   const naoAtendidos = atendimentos.filter(atendimento => !atendimento.resultDescription); 
 
-  useEffect(() => {
-    const fetchAtendimentos = async () => {
-      try {
-        const data = await AtendimentoGetAll();
-        setAtendimentos(data);                         // atualiza o estado
-      } catch (error) {
-        console.error('Erro ao buscar atendimentos:', error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchAtendimentos();
-  }, []);
+  const fetchData = async () => {
+    setLoading(true);
+    try {
+      const [atendimentosData, animalsData] = await Promise.all([AtendimentoGetAll(), AnimalGetAll()]);
+      setAtendimentos(atendimentosData);
+      setAnimals(animalsData);
+    } catch (error) {
+      console.error('Erro ao buscar dados:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   useEffect(() => {
-    const fetchAnimals = async () => {
-      try {
-        const data = await AnimalGetAll();
-        setAnimals(data);                         
-      } catch (error) {
-        console.error('Erro ao buscar animais:', error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchAnimals();
+    fetchData();
   }, []);
 
   if (loading) return <p>Carregando...</p>;
