@@ -45,33 +45,6 @@ function QueuePage() {
     <PageWrapper>
       <Header>
         <Title>Fila de Atendimento</Title>
-        {/* <QueueControls>
-          <SelectContainer>
-            <Label htmlFor="select-animal">Adicionar à Fila:</Label>
-            <Select
-              id="select-animal"
-              value={selectedAnimalId}
-              onChange={(e) => setSelectedAnimalId(e.target.value)}
-            >
-              <option value="">Selecione um cliente/animal</option>
-              {mockClientsWithAnimals.map(client => (
-                <optgroup key={client.id} label={client.nome}>
-                  {client.animais.map(animal => (
-                    <option key={animal.id} value={animal.id}>
-                      {animal.nome}
-                    </option>
-                  ))}
-                </optgroup>
-              ))}
-            </Select>
-          </SelectContainer>
-          <AddToQueueButton 
-            onClick={handleAddToQueue}
-            disabled={!selectedAnimalId} // Desabilita se nada estiver selecionado
-          >
-            Adicionar à Fila
-          </AddToQueueButton>
-        </QueueControls> */}
       </Header>
 
       <AtendimentoList></AtendimentoList>

@@ -119,8 +119,7 @@ function HomePage() {
         Simplifique o cadastro de clientes, acompanhe a saúde dos animais e organize
         sua fila de atendimento com facilidade.
       </WelcomeText>
-      {/* Exemplo de botão que leva para a página de clientes, use Link do react-router-dom se estiver usando */}
-      <CallToAction href="/clientes-e-animais">Começar Agora</CallToAction>
+      <CallToAction href="/animais">Começar Agora</CallToAction>
       </ContentContainer>
       
     </HomePageWrapper>
