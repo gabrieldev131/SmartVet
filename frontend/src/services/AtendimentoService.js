@@ -40,6 +40,7 @@ export const atendimentoService = {
 
 // OBS: id e payload devem ser no formato especificado no Swagger
 
+//lembrar de ajustar os nomes dos campos para o padrão do Swagger
 export class Appointment {
     constructor({ id, scheduled_date, urgency, result_description, animalId, apointmentAnimalId }) {
   this.id = id;

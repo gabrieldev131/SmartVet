@@ -1,10 +1,13 @@
 import { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { AtendimentoButton } from './AtendimentoStyle';
-import { Appointment, AtendimentoCreate, AtendimentoGetAll } from '../../services/AtendimentoService';
+import { Appointment, AtendimentoCreate, AtendimentoGetAll, AtendimentoUpdate } from '../../services/AtendimentoService';
 import Modal from '../Modal';
 import AtendimentoForm from './AtendimentoForm';
 import { AnimalGetAll } from '../../services/AnimalService';
+import AtendimentoCard from './AtendimentoCard';
+import AtendimentoUpdateForm from './AtendimentoUpdateForm';
+
 
 // Paleta de cores (para consistência com as outras páginas)
 const colors = {
@@ -75,12 +78,6 @@ const AnimalName = styled.p`
   margin: 0;
 `;
 
-const ClientName = styled.p`
-  font-size: 0.95rem;
-  color: ${colors.mediumGray};
-  margin: 5px 0 0 0;
-`;
-
 const QueueActions = styled.div`
   display: flex;
   gap: 10px;
@@ -134,6 +131,9 @@ export function AtendimentoList() {
   const [loading, setLoading] = useState(true);
   const [creating, setCreating] = useState(false);
 
+  const [atendimentoSelecionado, setAtendimentoSelecionado] = useState(null);
+  const [descricaoResultado, setDescricaoResultado] = useState('');
+
   useEffect(() => {
     const fetchAtendimentos = async () => {
       try {
@@ -153,7 +153,7 @@ export function AtendimentoList() {
     const fetchAnimals = async () => {
       try {
         const data = await AnimalGetAll();
-        setAnimals(data);                         // atualiza o estado
+        setAnimals(data);                         
       } catch (error) {
         console.error('Erro ao buscar animais:', error);
       } finally {
@@ -164,6 +164,7 @@ export function AtendimentoList() {
     fetchAnimals();
   }, []);
 
+  if (loading) return <p>Carregando...</p>;
 
   const handleNovoAtendimento = async (formData) => {
     try {
@@ -183,6 +184,39 @@ export function AtendimentoList() {
     }
   };
 
+  const onRegistrar = (id) => {
+    const atendimento = atendimentos.find(a => a.id === id);
+    if (atendimento) {
+      setAtendimentoSelecionado(atendimento); //abre modal
+      setDescricaoResultado(atendimento.resultDescription || ''); //preenche descricao se existir no banco
+    }
+  };
+
+  const handleSalvarDescricao = async () => {
+    try {
+      //parametro: atributos que o backend espera (melhorar isso no service)
+      const atualizado = new Appointment({
+        id: atendimentoSelecionado.id,
+        scheduled_date: atendimentoSelecionado.scheduledDate, 
+        urgency: atendimentoSelecionado.urgency,
+        result_description: descricaoResultado,
+        animalId: atendimentoSelecionado.animalId
+      });
+
+      await AtendimentoUpdate(atendimentoSelecionado.id, atualizado);
+
+      // atualiza a lista após salvar
+      const atualizados = await AtendimentoGetAll();
+      setAtendimentos(atualizados);
+
+      
+      setAtendimentoSelecionado(null);// fecha modal
+      setDescricaoResultado('');// limpa a descrição
+    } catch (error) {
+      console.error("Erro ao atualizar atendimento:", error);
+    }
+  };
+
 
   return (
 
@@ -194,6 +228,16 @@ export function AtendimentoList() {
           onCancel={() => setCreating(false)}
         />
       </Modal>
+      <Modal isOpen={!!atendimentoSelecionado} onClose={() => setAtendimentoSelecionado(null)}>
+        <AtendimentoUpdateForm
+          animal={animals.find(a => a.id === atendimentoSelecionado?.animalId)}
+          atendimento={atendimentoSelecionado}
+          descricao={descricaoResultado}
+          onChangeDescricao={setDescricaoResultado}
+          onCancel={() => setAtendimentoSelecionado(null)}
+          onSave={handleSalvarDescricao}
+        />
+      </Modal>
       <QueueListHeader>
         <QueueListTitle>Animais na Fila ({atendimentos.length})</QueueListTitle>
         <AtendimentoButton className='new-atendimento' onClick={() => setCreating(true)}>
@@ -202,40 +246,29 @@ export function AtendimentoList() {
       </QueueListHeader>
 
       {atendimentos.length === 0 ? (
-  <EmptyQueueMessage>
-    A fila de atendimento está vazia no momento. Adicione um atendimento!
-  </EmptyQueueMessage>
-) : (
-  [...atendimentos]
-    .sort((a, b) => {
-      if (a.urgency !== b.urgency) return b.urgency - a.urgency;
-      return new Date(a.scheduled_date) - new Date(b.scheduled_date);
-    })
-    .map(atendimento => {
-      console.log('atendimento.animalId:', atendimento.animalId);
-      console.log('animals:', animals);
+        <EmptyQueueMessage>
+          A fila de atendimento está vazia no momento. Adicione um atendimento!
+        </EmptyQueueMessage>
+      ) : (
+        [...atendimentos]
+          .sort((a, b) => {
+            if (a.urgency !== b.urgency) return b.urgency - a.urgency;
+            return new Date(a.scheduled_date) - new Date(b.scheduled_date);
+          })
+          .map(atendimento => {
+            const animal = animals.find(a => a.id === atendimento.animalId);
 
-      const animal = animals.find(a => a.id === atendimento.animalId);
+            return (
+              <AtendimentoCard
+                key={atendimento.id}
+                animal={animal}
+                atendimento={atendimento}
+                onRegistrar={onRegistrar}
+              />
+            );
+          })
 
-      return (
-        <QueueItem key={atendimento.id}>
-          <AnimalInfo>
-            <AnimalName>
-              {animal?.animal_name ?? 'Animal não encontrado'}
-            </AnimalName>
-          </AnimalInfo>
-          <QueueActions>
-            <ActionButton className="attended">
-              Atendido
-            </ActionButton>
-            <ActionButton className="gave-up">
-              Desistiu
-            </ActionButton>
-          </QueueActions>
-        </QueueItem>
-      );
-    })
-)}
+      )}
     </QueueListContainer>
   );
 }
