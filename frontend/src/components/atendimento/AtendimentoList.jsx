@@ -134,6 +134,8 @@ export function AtendimentoList() {
   const [atendimentoSelecionado, setAtendimentoSelecionado] = useState(null);
   const [descricaoResultado, setDescricaoResultado] = useState('');
 
+  const naoAtendidos = atendimentos.filter(atendimento => !atendimento.resultDescription); 
+
   useEffect(() => {
     const fetchAtendimentos = async () => {
       try {
@@ -239,7 +241,7 @@ export function AtendimentoList() {
         />
       </Modal>
       <QueueListHeader>
-        <QueueListTitle>Animais na Fila ({atendimentos.length})</QueueListTitle>
+        <QueueListTitle>Animais na Fila ({naoAtendidos.length})</QueueListTitle>
         <AtendimentoButton className='new-atendimento' onClick={() => setCreating(true)}>
           Novo Atendimento
         </AtendimentoButton>
@@ -257,7 +259,7 @@ export function AtendimentoList() {
           })
           .map(atendimento => {
             const animal = animals.find(a => a.id === atendimento.animalId);
-
+            if ((atendimento.resultDescription) !== "") return null; // não renderiza se já tiver resultado
             return (
               <AtendimentoCard
                 key={atendimento.id}
