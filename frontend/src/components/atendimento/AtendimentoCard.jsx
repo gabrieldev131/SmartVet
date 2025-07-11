@@ -25,13 +25,13 @@ const Info = styled.div``;
 
 const AnimalName = styled.h3`
   margin: 0;
-  font-size: 1.4rem;
+  font-size: 1.5rem;
   color: #3498db;
 `;
 
 const Detail = styled.p`
-  margin: 5px 0;
-  font-size: 0.95rem;
+
+  font-size: 1rem;
   color: #555;
 `;
 
@@ -52,9 +52,10 @@ const DateLabel = styled.p`
 const Button = styled.button`
   background-color: #3498db;
   color: white;
+  font-size: 1rem; 
   border: none;
   border-radius: 6px;
-  padding: 10px 14px;
+  padding: 10px 30px;
   cursor: pointer;
   font-weight: bold;
   transition: background-color 0.2s ease;
@@ -71,8 +72,8 @@ const AtendimentoCard = ({ animal, atendimento, onRegistrar }) => {
     <Card $urgency={urgency}>
       <Info>
         <AnimalName>{animal.animal_name}</AnimalName>
-        <Detail>Espécie: {animal.specie}</Detail>
-        <Detail>Peso: {animal.weight} kg</Detail>
+        <Detail><strong>Espécie:</strong> {animal.specie}</Detail>
+        <Detail><strong>Peso:</strong> {animal.weight} kg</Detail>
         {/* <DateLabel>Agendado para: {new Date(scheduledDate).toLocaleString('pt-BR')}</DateLabel> */}
         <Urgency urgency={urgency}>
           {['Baixa', 'Média', 'Alta', 'Urgente'][urgency] || 'Desconhecida'}
@@ -80,7 +81,7 @@ const AtendimentoCard = ({ animal, atendimento, onRegistrar }) => {
       </Info>
 
       <Button onClick={() => onRegistrar(atendimento.id)}>
-        Registrar atendimento
+        Registrar <br />Atendimento
       </Button>
     </Card>
   );

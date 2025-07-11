@@ -174,6 +174,11 @@ export const Button = styled.button`
   &.new-animal {
     color: white;
     background-color: ${colors.successGreen};
+     &:hover {
+    background-color: rgb(45, 175, 99);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  }
   }
 
   &.edit {

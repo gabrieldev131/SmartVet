@@ -79,10 +79,6 @@ function AtendimentoForm({ animals, onSave, onCancel }) {
         <FormInput type="datetime-local" id="scheduled_date" name="scheduled_date" onChange={handleChange} value={form.scheduled_date} required />
       </FormRow>
 
-      <FormRow>
-        <FormLabel htmlFor="result_description">Descrição do resultado (opcional):</FormLabel>
-        <FormInput as="textarea" id="result_description" name="result_description" onChange={handleChange} value={form.result_description} rows="4" />
-      </FormRow>
 
       <ButtonContainer>
         <Button type="button" className="delete" onClick={onCancel}>

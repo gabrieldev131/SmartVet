@@ -83,11 +83,11 @@ function AnimalCreateForm({ initialAnimal = {}, onSave, onCancel }) {
           </FormRow>
     
           <Actions>
-            <CardButton type="submit" className="edit">
-              Salvar
-            </CardButton>
             <CardButton type="button" className="delete" onClick={onCancel}>
               Cancelar
+            </CardButton>
+            <CardButton type="submit" className="edit">
+              Salvar
             </CardButton>
           </Actions>
         </Card>

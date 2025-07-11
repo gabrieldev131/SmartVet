@@ -126,8 +126,8 @@ const EmptyQueueMessage = styled.p`
 
 export function AtendimentoList() {
 
-  const [atendimentos, setAtendimentos] = useState([]);
-  const [animals, setAnimals] = useState([]);
+  const [atendimentos, setAtendimentos] = useState([]); //array de atendimentos
+  const [animals, setAnimals] = useState([]); //array de animais
   const [loading, setLoading] = useState(true);
   const [creating, setCreating] = useState(false);
 
@@ -136,7 +136,7 @@ export function AtendimentoList() {
 
   const naoAtendidos = atendimentos.filter(atendimento => !atendimento.resultDescription); 
 
-  const fetchData = async () => {
+  const fetchData = async () => { //pega os dados do backend
     setLoading(true);
     try {
       const [atendimentosData, animalsData] = await Promise.all([AtendimentoGetAll(), AnimalGetAll()]);
