@@ -9,6 +9,7 @@ namespace SmartVet.Domain.Base
     public enum ResultType
     {
         SUCCESS,
-        BAD_REQUEST
+        BAD_REQUEST,
+        NOT_FOUND
     }
 }

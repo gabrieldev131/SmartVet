@@ -15,8 +15,8 @@ namespace SmartVet.Infrastructure.Context
             modelBuilder.ApplyConfigurationsFromAssembly(GetType().Assembly);
         }
 
-        //public DbSet<User> Users { get; set; }
-        //public DbSet<Role> Roles { get; set; } = null!;
+        public new DbSet<User> Users { get; set; }
+        public new DbSet<Role> Roles { get; set; } = null!;
         //public DbSet<GenericUser> GenericUsers { get; set; }
         //public DbSet<Employee> Employees { get; set; }
         //public DbSet<Admin> Admins { get; set; }

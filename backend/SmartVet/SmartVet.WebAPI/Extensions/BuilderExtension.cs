@@ -31,7 +31,7 @@ namespace SmartVet.WebApi.Extensions
             var key = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(jwtKey));
 
             builder.Services.AddCors();
-
+            /*
             builder.Services.AddMvc(config =>
             {
                 var policy = new AuthorizationPolicyBuilder()
@@ -39,7 +39,7 @@ namespace SmartVet.WebApi.Extensions
                                 .Build();
                 config.Filters.Add(new AuthorizeFilter(policy));
             });
-
+            */
             builder.Services.AddAuthorization(options =>
             {
                 options.AddPolicy("user", policy => policy.RequireClaim("Store", "user"));
@@ -65,8 +65,6 @@ namespace SmartVet.WebApi.Extensions
                         ClockSkew = TimeSpan.Zero
                     };
                 });
-
-            //builder.Services.AddAuthorization();
         }
     }
 }

@@ -36,5 +36,18 @@ namespace SmartVet.Domain.Base
             IsSuccess = true,
             Value = value
         };
+
+        public static TResult<T> Failure(ResultType type, List<string> errorMessages)
+        {
+            // Convert List<string> to ICollection<Error>
+            var convertedErrors = errorMessages.Select(msg => Error.FromMessage(msg)).ToList();
+
+            return new TResult<T>
+            {
+                IsSuccess = false, // It's a failure
+                Type = type,
+                Errors = convertedErrors // Assign the converted list
+            };
+        }
     }
 }
