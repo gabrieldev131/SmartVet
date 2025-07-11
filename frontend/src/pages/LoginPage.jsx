@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 // Certifique-se que o caminho para sua imagem está correto!
 import SmartVetGato from '../imgs/gato.png';
+import { Login, LoginAttempt } from '../services/LoginService';
 
 // Paleta de cores para consistência
 const colors = {
@@ -162,14 +163,23 @@ function LoginPage() {
   const handleLogin = (e) => {
     e.preventDefault();
 
-    // 3. Adicione a lógica de autenticação
-    if (email === 'admin@email.com' && senha === '12345') {
-      // Se as credenciais estiverem corretas, redirecione para a página home
-      navigate('/home');
-    } else {
-      // Caso contrário, exiba uma mensagem de erro
-      alert('Email ou senha incorretos.');
+    const login = new Login({email: email, password: senha})
+    const response = LoginAttempt(login)
+
+    try {
+      if (response.data.token) {
+        // Se as credenciais estiverem corretas, redirecione para a página home
+        navigate('/home');
+      } else {
+        // Caso contrário, exiba uma mensagem de erro
+        alert('Email ou senha incorretos.');
+      }
     }
+    catch (error) {
+      alert('Acesso inválido')
+      navigate('/')
+    }
+    
   };
 
   return (
