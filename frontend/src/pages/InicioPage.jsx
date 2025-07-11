@@ -116,7 +116,7 @@ function HomePage() {
       <WelcomeTitle>Bem-vindo ao SmartVet!</WelcomeTitle>
       <WelcomeText>
         Sua plataforma completa para gerenciar atendimentos veterinários.
-        Simplifique o cadastro de clientes, acompanhe a saúde dos animais e organize
+        Simplifique o cadastro dos animais e organize
         sua fila de atendimento com facilidade.
       </WelcomeText>
       <CallToAction href="/animais">Começar Agora</CallToAction>
